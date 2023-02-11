@@ -17,6 +17,7 @@ const Home: React.FC = () => {
             <PersonalDataContainer />
          </div>
          <div>Test</div>
+         <div>Test</div>
       </div>
    );
 };
