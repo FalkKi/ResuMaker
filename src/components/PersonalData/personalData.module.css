@@ -1,0 +1,26 @@
+.container{
+   max-width: 500px;
+   padding: 15px;
+   width: 50%;
+}
+
+.imageButton {
+   height: 150px;
+   width: 150px;
+   border-radius: 4px;
+   display: flex;
+   flex-direction: column;
+}
+
+.image {
+   height: 150px;
+   width: 150px;
+   border-radius: 4px;
+}
+.inputFields{
+   display: flex;
+   flex-direction: column;
+}
+.infoField{
+   width: 300px;
+}

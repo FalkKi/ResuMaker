@@ -1,0 +1,8 @@
+.container {
+   display: flex;
+   flex-direction: column;
+}
+.hiddenContainer{
+   transition: all 0.5s;
+   height: 50px;
+}

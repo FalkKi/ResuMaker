@@ -1,0 +1,64 @@
+import React, { useEffect, useState } from "react";
+import styles from "./languages.module.css";
+import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { LanguageHistoryProps, LanguageInfoType } from "../../types/types";
+import Button from '@mui/material/Button';
+
+const Languages: React.FC<LanguageHistoryProps> = ({
+   id,
+   deleteLanguageHistoryElement,
+   getUserInfoData
+}) => {
+
+   const [languageInfo, setlanguageInfo] = useState<LanguageInfoType>({
+      id: id,
+      languageName: '',
+      level: '',
+   });
+
+   useEffect(() => {
+      if (languageInfo.languageName !== '' && languageInfo.level !== '') {
+         getUserInfoData(languageInfo, 'languages');
+      };
+   }, [languageInfo])
+
+   return (
+      <>
+         <h3>Languages</h3>
+         <Button onClick={() => deleteLanguageHistoryElement(id)} color='error' variant='contained'>X</Button>
+         <div className={styles.container}>
+            <TextField
+               label="language"
+               value={languageInfo.languageName}
+               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setlanguageInfo({ ...languageInfo, languageName: e.target.value })}
+            />
+            <Box sx={{ minWidth: 120 }}>
+               <FormControl fullWidth>
+                  <InputLabel id="demo-simple-select-label">Level</InputLabel>
+                  <Select
+                     labelId="selectLanguage"
+                     id="selectLanguage-select"
+                     label="Age"
+                     value={languageInfo.level}
+                     onChange={(e: SelectChangeEvent) => { setlanguageInfo({ ...languageInfo, level: e.target.value }) }}
+                  >
+                     <MenuItem value={"Do not show"}>Do not show</MenuItem>
+                     <MenuItem value={"Basic level"}>Basic level</MenuItem>
+                     <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
+                     <MenuItem value={"Upper-Intemediate"}>Upper-Intemediate</MenuItem>
+                     <MenuItem value={"Advanced"}>Advanced</MenuItem>
+                     <MenuItem value={"Native speaker"}>Native speaker</MenuItem>
+                  </Select>
+               </FormControl>
+            </Box>
+         </div>
+      </>
+   );
+};
+
+export default Languages;
