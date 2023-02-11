@@ -16,8 +16,6 @@ const Home: React.FC = () => {
          <div className={styles.personInfo}>
             <PersonalDataContainer />
          </div>
-         <div>Test</div>
-         <div>Test</div>
       </div>
    );
 };
