@@ -12,8 +12,6 @@ import { WorkHistoryType } from '../../types/types';
 import EducationHistory from './../EducationHistory/EducationHistory';
 import Languages from '../Languages/Languages';
 import Skills from './../Skills/Skills';
-import Collapse from '@mui/material/Collapse';
-
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();

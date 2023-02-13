@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { WorkHistoryProps } from '../../types/types';
 import { UserWorkHistory } from '../../types/types';
-import CollapsedComponent from '../CollapsedComponent/CollapsedWorkHistoryComponent';
 import styles from './workHistory.module.css';
 import Collapse from '@mui/material/Collapse';
-import CollapsedWorkHistoryComponent from './../CollapsedComponent/CollapsedWorkHistoryComponent';
+import CollapsedEducationHistory from '../CollapsedComponent/CollapsedComponent';
+import CollapsedComponent from './../CollapsedComponent/CollapsedComponent';
 
 
 
@@ -44,8 +44,8 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
 
    return (
       <>
-         <CollapsedWorkHistoryComponent
-            info={workHistory}
+         <CollapsedComponent
+            info={{ userWorkHistory: workHistory }}
             setIsCollaped={setIsCollapsed}
             isCollapsed={isCollapsed}
             deleteElement={deleteWorkHistoryElement}

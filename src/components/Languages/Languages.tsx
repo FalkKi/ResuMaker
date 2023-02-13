@@ -8,6 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { LanguageHistoryProps, LanguageInfoType } from "../../types/types";
 import Button from '@mui/material/Button';
+import Collapse from '@mui/material/Collapse';
+import CollapsedComponent from './../CollapsedComponent/CollapsedComponent';
 
 const Languages: React.FC<LanguageHistoryProps> = ({
    id,
@@ -21,42 +23,59 @@ const Languages: React.FC<LanguageHistoryProps> = ({
       level: '',
    });
 
+   const [isCollapsed, setIsCollapsed] = useState<boolean | undefined>(true);
+
+
    useEffect(() => {
       if (languageInfo.languageName !== '' && languageInfo.level !== '') {
          getUserInfoData(languageInfo, 'languages');
       };
-   }, [languageInfo])
+   }, [languageInfo]);
+
+   const toggleIsCollapsed = () => {
+      setIsCollapsed(!isCollapsed);
+   };
 
    return (
       <>
-         <h3>Languages</h3>
-         <Button onClick={() => deleteLanguageHistoryElement(id)} color='error' variant='contained'>X</Button>
-         <div className={styles.container}>
-            <TextField
-               label="language"
-               value={languageInfo.languageName}
-               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setlanguageInfo({ ...languageInfo, languageName: e.target.value })}
-            />
-            <Box sx={{ minWidth: 120 }}>
-               <FormControl fullWidth>
-                  <InputLabel id="demo-simple-select-label">Level</InputLabel>
-                  <Select
-                     labelId="selectLanguage"
-                     id="selectLanguage-select"
-                     label="Age"
-                     value={languageInfo.level}
-                     onChange={(e: SelectChangeEvent) => { setlanguageInfo({ ...languageInfo, level: e.target.value }) }}
-                  >
-                     <MenuItem value={"Do not show"}>Do not show</MenuItem>
-                     <MenuItem value={"Basic level"}>Basic level</MenuItem>
-                     <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
-                     <MenuItem value={"Upper-Intemediate"}>Upper-Intemediate</MenuItem>
-                     <MenuItem value={"Advanced"}>Advanced</MenuItem>
-                     <MenuItem value={"Native speaker"}>Native speaker</MenuItem>
-                  </Select>
-               </FormControl>
-            </Box>
-         </div>
+         <CollapsedComponent
+            info={{ languageInfoType: languageInfo }}
+            setIsCollaped={setIsCollapsed}
+            isCollapsed={isCollapsed}
+            deleteElement={deleteLanguageHistoryElement}
+            id={id}
+         />
+         <Collapse in={isCollapsed}>
+            <h3>Languages</h3>
+            <Button onClick={() => deleteLanguageHistoryElement(id)} color='error' variant='contained'>X</Button>
+            <button onClick={toggleIsCollapsed}>v</button>
+            <div className={styles.container}>
+               <TextField
+                  label="language"
+                  value={languageInfo.languageName}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setlanguageInfo({ ...languageInfo, languageName: e.target.value })}
+               />
+               <Box sx={{ minWidth: 120 }}>
+                  <FormControl fullWidth>
+                     <InputLabel id="demo-simple-select-label">Level</InputLabel>
+                     <Select
+                        labelId="selectLanguage"
+                        id="selectLanguage-select"
+                        label="Age"
+                        value={languageInfo.level}
+                        onChange={(e: SelectChangeEvent) => { setlanguageInfo({ ...languageInfo, level: e.target.value }) }}
+                     >
+                        <MenuItem value={"Do not show"}>Do not show</MenuItem>
+                        <MenuItem value={"Basic level"}>Basic level</MenuItem>
+                        <MenuItem value={"Intermediate"}>Intermediate</MenuItem>
+                        <MenuItem value={"Upper-Intemediate"}>Upper-Intemediate</MenuItem>
+                        <MenuItem value={"Advanced"}>Advanced</MenuItem>
+                        <MenuItem value={"Native speaker"}>Native speaker</MenuItem>
+                     </Select>
+                  </FormControl>
+               </Box>
+            </div>
+         </Collapse>
       </>
    );
 };
