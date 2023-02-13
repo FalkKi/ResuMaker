@@ -100,8 +100,6 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                   key={el.id}
                   getUserInfoData={props.getUserInfoData}
                   deleteWorkHistoryElement={props.deleteWorkHistoryElement}
-                  isCollapsed={props.isCollapsed}
-                  setIsCollapsed={props.setIsCollapsed}
                />
             ))}
          </div>

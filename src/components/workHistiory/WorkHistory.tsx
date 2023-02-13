@@ -5,9 +5,10 @@ import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { WorkHistoryProps } from '../../types/types';
 import { UserWorkHistory } from '../../types/types';
-import CollapsedComponent from './../CollapsedComponent/CollapsedComponent';
+import CollapsedComponent from '../CollapsedComponent/CollapsedWorkHistoryComponent';
 import styles from './workHistory.module.css';
 import Collapse from '@mui/material/Collapse';
+import CollapsedWorkHistoryComponent from './../CollapsedComponent/CollapsedWorkHistoryComponent';
 
 
 
@@ -15,8 +16,6 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
    id,
    getUserInfoData,
    deleteWorkHistoryElement,
-   isCollapsed,
-   setIsCollapsed
 }) => {
    const [workHistory, setWorkHistory] = useState<UserWorkHistory>({
       id: id,
@@ -26,7 +25,8 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
       endDate: '',
       description: '',
    });
-   console.log('workHistory render');
+   const [isCollapsed, setIsCollapsed] = useState<boolean | undefined>(true);
+
    useEffect(() => {
       if (workHistory.position !== '' && workHistory.company !== '' && workHistory.startDate !== ''
          && workHistory.endDate !== '' && workHistory.description !== '') {
@@ -38,41 +38,55 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
       setWorkHistory({ ...workHistory, [e.target.placeholder]: e.target.value })
    };
 
+   const toggleIsCollapsed = () => {
+      setIsCollapsed(!isCollapsed);
+   };
+
    return (
-      <Collapse in={isCollapsed}>
-         <Button onClick={() => deleteWorkHistoryElement(id)} color='error' variant='contained'>X</Button>
-         <h3>Work History</h3>
-         <TextField
-            onChange={wokHistoryInputHandler}
-            label="position"
-            value={workHistory.position}
-            placeholder="position"
+      <>
+         <CollapsedWorkHistoryComponent
+            info={workHistory}
+            setIsCollaped={setIsCollapsed}
+            isCollapsed={isCollapsed}
+            deleteElement={deleteWorkHistoryElement}
+            id={id}
          />
-         <TextField
-            label="Company"
-            onChange={wokHistoryInputHandler}
-            value={workHistory.company}
-            placeholder="company"
-         />
-         <TextField
-            label="Start date"
-            onChange={wokHistoryInputHandler}
-            value={workHistory.startDate}
-            placeholder="startDate"
-         />
-         <TextField
-            label="End date"
-            onChange={wokHistoryInputHandler}
-            value={workHistory.endDate}
-            placeholder="endDate"
-         />
-         <p>Description</p>
-         <TextareaAutosize
-            onChange={wokHistoryInputHandler}
-            value={workHistory.description}
-            placeholder="description"
-         />
-      </Collapse >
+         <Collapse in={isCollapsed}>
+            <Button onClick={() => deleteWorkHistoryElement(id)} color='error' variant='contained'>X</Button>
+            <button onClick={toggleIsCollapsed}>v</button>
+            <h3>Work History</h3>
+            <TextField
+               onChange={wokHistoryInputHandler}
+               label="position"
+               value={workHistory.position}
+               placeholder="position"
+            />
+            <TextField
+               label="Company"
+               onChange={wokHistoryInputHandler}
+               value={workHistory.company}
+               placeholder="company"
+            />
+            <TextField
+               label="Start date"
+               onChange={wokHistoryInputHandler}
+               value={workHistory.startDate}
+               placeholder="startDate"
+            />
+            <TextField
+               label="End date"
+               onChange={wokHistoryInputHandler}
+               value={workHistory.endDate}
+               placeholder="endDate"
+            />
+            <p>Description</p>
+            <TextareaAutosize
+               onChange={wokHistoryInputHandler}
+               value={workHistory.description}
+               placeholder="description"
+            />
+         </Collapse >
+      </>
    );
 };
 export default WorkHistory;

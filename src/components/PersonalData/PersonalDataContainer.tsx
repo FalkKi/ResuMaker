@@ -20,12 +20,11 @@ const PersonalDataContainer: React.FC = () => {
       languages: [],
       skills: [],
    });
-
+   console.log(userInfo)
    const [childrenWorkHistoryArray, setChildrenWorkHistoryArray] = useState<WorkHistoryType[]>([]);
    const [childrenEducationHistoryArray, setChildrenEducationHistoryArray] = useState<EducationHistoryType[]>([]);
    const [childrenLanguageHistoryArray, setChildrenLanguageHistoryArray] = useState<LanguageHistoryType[]>([]);
    const [childrenSkillsHistoryArray, setChildrenSkillsHistoryArray] = useState<SkillsHistoryType[]>([]);
-   const [isCollapsed, setIsCollapsed] = useState<boolean | undefined>(true);
 
 
    const getUserInfoData = (data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
@@ -40,7 +39,7 @@ const PersonalDataContainer: React.FC = () => {
          }));
       };
    };
-   
+
    const eventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       setUserInfo({ ...userInfo, [e.target.placeholder]: e.target.value })
    };
@@ -155,8 +154,6 @@ const PersonalDataContainer: React.FC = () => {
       addMoreWorkData={addMoreWorkData}
       handleChangeFile={handleChangeFile}
       onClickRemoveImage={onClickRemoveImage}
-      isCollapsed={isCollapsed}
-      setIsCollapsed={setIsCollapsed}
    />
 };
 

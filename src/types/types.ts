@@ -27,34 +27,26 @@ export type SkillsHistoryType = {
    id: string,
 };
 
-export type WorkHistoryProps = {
+interface IComponentProps {
    id: string,
    getUserInfoData: (data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
       param: "educationHistory" | "workHistory" | "languages" | "skills") => void,
+};
+
+export interface WorkHistoryProps extends IComponentProps {
    deleteWorkHistoryElement: (id: string) => void,
-   isCollapsed: boolean | undefined,
-   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean | undefined>>
 };
 
-export type LanguageHistoryProps = {
-   id: string,
+export interface LanguageHistoryProps extends IComponentProps {
    deleteLanguageHistoryElement: (id: string) => void
-   getUserInfoData: (data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
-      param: "educationHistory" | "workHistory" | "languages" | "skills") => void,
 };
 
-export type SkillsHistoryProps = {
-   id: string,
+export interface SkillsHistoryProps extends IComponentProps {
    deleteSkillsHistoryElement: (id: string) => void
-   getUserInfoData: (data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
-      param: "educationHistory" | "workHistory" | "languages" | "skills") => void,
 };
 
-export type EducationHistoryProps = {
-   id: string,
+export interface EducationHistoryProps extends IComponentProps {
    deleteEducationHistoryElement: (id: string) => void,
-   getUserInfoData: (data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
-      param: "educationHistory" | "workHistory" | "languages" | "skills") => void,
 }
 
 export type PersonalDataProps = {
@@ -81,8 +73,6 @@ export type PersonalDataProps = {
    addMoreWorkData: () => void,
    handleChangeFile: (event: any) => Promise<void>,
    onClickRemoveImage: () => void,
-   isCollapsed: boolean | undefined,
-   setIsCollapsed: React.Dispatch<React.SetStateAction<boolean | undefined>>
 }
 
 export type UserWorkHistory = {
@@ -120,3 +110,26 @@ export type LanguageHistoryType = {
    id: string,
 };
 
+
+// type Info = UserWorkHistory? & UserEducationHistory? & LanguageInfoType? & UserSkillType;
+   interface PropsInfo {
+   setIsCollaped: React.Dispatch<React.SetStateAction<boolean | undefined>>,
+   isCollapsed: boolean | undefined,
+   id: string,
+   deleteElement: (id: string) => void,
+};
+
+export interface CollapsedWorkHistoryProps extends PropsInfo {
+   info: UserWorkHistory,
+};
+
+export interface CollapsedEducationHistoryProps extends PropsInfo {
+   info: UserEducationHistory,
+};
+
+export interface CollapsedLangugesProps extends PropsInfo {
+   info: LanguageInfoType,
+};
+export interface CollapsedSkillsProps extends PropsInfo {
+   info: UserSkillType,
+};
