@@ -49,6 +49,11 @@ export interface SkillsHistoryProps extends IComponentProps {
 
 export interface EducationHistoryProps extends IComponentProps {
    deleteEducationHistoryElement: (id: string) => void,
+};
+
+export type StartUserInfoProps = {
+   eventHandler: (e: React.ChangeEvent<HTMLInputElement>) => void,
+   userInfo: User,
 }
 
 export type PersonalDataProps = {

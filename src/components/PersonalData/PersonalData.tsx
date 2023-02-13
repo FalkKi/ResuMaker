@@ -12,6 +12,7 @@ import { WorkHistoryType } from '../../types/types';
 import EducationHistory from './../EducationHistory/EducationHistory';
 import Languages from '../Languages/Languages';
 import Skills from './../Skills/Skills';
+import StartUserInfo from '../StartUserInformation/StartUserInformation';
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();
@@ -49,103 +50,72 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
             </Button>}
 
             <div className={styles.inputFields}>
-               <TextField
-                  className={styles.infoField}
-                  label="Job title" value={props.userInfo.jobTitle}
-                  onChange={props.eventHandler}
-                  placeholder='jobTitle' type='text' />
-               <TextField
-                  className={styles.infoField}
-                  label="your name" value={props.userInfo.firstName}
-                  onChange={props.eventHandler}
-                  placeholder='firstName' type='text' />
-               <TextField
-                  className={styles.infoField}
-                  label="your surname" value={props.userInfo.lastName}
-                  onChange={props.eventHandler}
-                  placeholder='lastName' type='text' />
-               <TextField
-                  className={styles.infoField}
-                  label="email" value={props.userInfo.email}
-                  onChange={props.eventHandler}
-                  placeholder='email' type='text' />
-               <TextField
-                  className={styles.infoField}
-                  label="date of birth" value={props.userInfo.birthDate}
-                  onChange={props.eventHandler}
-                  placeholder='birthDate' type='text' />
-               <TextField
-                  className={styles.infoField}
-                  label="country" value={props.userInfo.country}
-                  onChange={props.eventHandler}
-                  placeholder='country' type='text' />
-               <TextField
-                  className={styles.infoField}
-                  label="city" value={props.userInfo.city}
-                  onChange={props.eventHandler}
-                  placeholder='city' type='text' />
+               <StartUserInfo
+                  userInfo={props.userInfo}
+                  eventHandler={props.eventHandler}
+               />
             </div>
-         </div>
-         <ProfSummary
-            setUserInfo={props.setUserInfo}
-            profSummary={props.userInfo.profSummary}
-            userInfo={props.userInfo}
-         />
-         <div ref={listRef}>
-            {props.childrenWorkHistoryArray.map((el: WorkHistoryType) => (
-               <WorkHistory
-                  id={el.id}
-                  key={el.id}
-                  getUserInfoData={props.getUserInfoData}
-                  deleteWorkHistoryElement={props.deleteWorkHistoryElement}
-               />
-            ))}
-         </div>
-         <Button fullWidth onClick={props.addMoreWorkData} variant='outlined'>
-            {props.childrenWorkHistoryArray.length > 0 ? 'Add More' : 'Add Work history'}
-         </Button>
-         <>
-            {props.childrenEducationHistoryArray.map((el: EducationHistoryType) => (
-               <EducationHistory
-                  id={el.id}
-                  key={el.id}
-                  deleteEducationHistoryElement={props.deleteEducationHistoryElement}
-                  getUserInfoData={props.getUserInfoData}
-               />
-            ))}
-         </>
+            <ProfSummary
+               setUserInfo={props.setUserInfo}
+               profSummary={props.userInfo.profSummary}
+               userInfo={props.userInfo}
+            />
+            <div ref={listRef}>
+               {props.childrenWorkHistoryArray.map((el: WorkHistoryType) => (
+                  <WorkHistory
+                     id={el.id}
+                     key={el.id}
+                     getUserInfoData={props.getUserInfoData}
+                     deleteWorkHistoryElement={props.deleteWorkHistoryElement}
+                  />
+               ))}
+            </div>
+            <Button fullWidth onClick={props.addMoreWorkData} variant='outlined'>
+               {props.childrenWorkHistoryArray.length > 0 ? 'Add More' : 'Add Work history'}
+            </Button>
+            <>
+               {props.childrenEducationHistoryArray.map((el: EducationHistoryType) => (
+                  <EducationHistory
+                     id={el.id}
+                     key={el.id}
+                     deleteEducationHistoryElement={props.deleteEducationHistoryElement}
+                     getUserInfoData={props.getUserInfoData}
+                  />
+               ))}
+            </>
 
-         <Button fullWidth onClick={props.addEducationChildren} variant='outlined'>
-            {props.childrenEducationHistoryArray.length > 0 ? 'Add More' : 'Add Education history'}
-         </Button>
-         <>
-            {props.childrenLanguageHistoryArray.map((el: LanguageHistoryType) => (
-               <Languages
-                  id={el.id}
-                  key={el.id}
-                  deleteLanguageHistoryElement={props.deleteLanguageHistoryElement}
-                  getUserInfoData={props.getUserInfoData}
-               />
-            ))}
-         </>
-         <Button fullWidth onClick={props.addLanguageChildren} variant='outlined'>
-            {props.childrenLanguageHistoryArray.length > 0 ? 'Add more languages' : 'Add language'}
-         </Button>
-         <>
-            {props.childrenSkillsHistoryArray.map((el: SkillsHistoryType) => (
-               <Skills
-                  id={el.id}
-                  key={el.id}
-                  deleteSkillsHistoryElement={props.deleteSkillsHistoryElement}
-                  getUserInfoData={props.getUserInfoData}
-               />
-            ))}
-         </>
-         <Button fullWidth onClick={props.addSkillsChildren} variant='outlined'>
-            {props.childrenSkillsHistoryArray.length > 0 ? 'Add more Skills' : 'Add Skill'}
-         </Button>
+            <Button fullWidth onClick={props.addEducationChildren} variant='outlined'>
+               {props.childrenEducationHistoryArray.length > 0 ? 'Add More' : 'Add Education history'}
+            </Button>
+            <>
+               {props.childrenLanguageHistoryArray.map((el: LanguageHistoryType) => (
+                  <Languages
+                     id={el.id}
+                     key={el.id}
+                     deleteLanguageHistoryElement={props.deleteLanguageHistoryElement}
+                     getUserInfoData={props.getUserInfoData}
+                  />
+               ))}
+            </>
+            <Button fullWidth onClick={props.addLanguageChildren} variant='outlined'>
+               {props.childrenLanguageHistoryArray.length > 0 ? 'Add more languages' : 'Add language'}
+            </Button>
+            <>
+               {props.childrenSkillsHistoryArray.map((el: SkillsHistoryType) => (
+                  <Skills
+                     id={el.id}
+                     key={el.id}
+                     deleteSkillsHistoryElement={props.deleteSkillsHistoryElement}
+                     getUserInfoData={props.getUserInfoData}
+                  />
+               ))}
+            </>
+            <Button fullWidth onClick={props.addSkillsChildren} variant='outlined'>
+               {props.childrenSkillsHistoryArray.length > 0 ? 'Add more Skills' : 'Add Skill'}
+            </Button>
 
-         <Button onClick={createResume} size="large" variant="contained">SAVE CHANGES</Button>
+            <Button onClick={createResume} size="large" variant="contained">SAVE CHANGES</Button>
+         </div>
       </div>
    );
 };
