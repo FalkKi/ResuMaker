@@ -35,10 +35,12 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
    }, [workHistory]);
 
    const wokHistoryInputHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-      setWorkHistory({ ...workHistory, [e.target.placeholder]: e.target.value })
+      setWorkHistory({ ...workHistory, [e.target.placeholder]: e.target.value });
+      console.log('render')
    };
 
-   const toggleIsCollapsed = () => {
+   const toggleIsCollapsed = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
       setIsCollapsed(!isCollapsed);
    };
 

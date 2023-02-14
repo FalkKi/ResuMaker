@@ -29,7 +29,8 @@ const Skills: React.FC<SkillsHistoryProps> = ({
       };
    }, [userSkills]);
 
-   const toggleIsCollapsed = () => {
+   const toggleIsCollapsed = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
       setIsCollapsed(!isCollapsed);
    };
 

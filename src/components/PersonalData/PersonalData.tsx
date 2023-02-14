@@ -13,24 +13,41 @@ import EducationHistory from './../EducationHistory/EducationHistory';
 import Languages from '../Languages/Languages';
 import Skills from './../Skills/Skills';
 import StartUserInfo from '../StartUserInformation/StartUserInformation';
+import Box from '@mui/material/Box';
+
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();
    const inputFileRef = useRef<HTMLInputElement>(null);
    const listRef = useRef<HTMLDivElement | null>(null);
-   const createResume = () => {
+
+   const createResume = (e: React.MouseEvent<HTMLButtonElement>) => {
+      console.log(e)
+      e.preventDefault()
       dispatch(postCV(props.userInfo));
    };
 
    const isButtonDisabled = () => {
       return !(props.userInfo.jobTitle !== '' && props.userInfo.firstName !== ''
-         && props.userInfo.lastName !== '' && props.userInfo.imageUrl !== '' && props.userInfo.email !== '' && props.userInfo.country
-         && props.userInfo.city !== '' && props.userInfo.birthDate !== '');
+         && props.userInfo.lastName !== '' && props.userInfo.email !== '' && props.userInfo.country
+         && props.userInfo.city !== '' && props.userInfo.birthDate !== '' && props.userInfo.profSummary !== '');
    };
 
 
    return (
       <div className={styles.container}>
+         <Box
+            component="form"
+            sx={{
+               '& .MuiTextField-root': { m: 0.5, width: '100%' },
+               display: 'flex',
+               flexDirection: 'column',
+               maxWidth: "600px",
+            }}
+
+         noValidate
+         autoComplete="off"
+         >
          <div>
             <input ref={inputFileRef} type="file" onChange={props.handleChangeFile} hidden />
             {props.userInfo.imageUrl ? (
@@ -114,9 +131,10 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                {props.childrenSkillsHistoryArray.length > 0 ? 'Add more Skills' : 'Add Skill'}
             </Button>
 
-            <Button onClick={createResume} size="large" variant="contained">SAVE CHANGES</Button>
+            <Button disabled={isButtonDisabled()} onClick={(e) => createResume(e)} size="large" variant="contained">SAVE CHANGES</Button>
          </div>
-      </div>
+      </Box>
+      </div >
    );
 };
 

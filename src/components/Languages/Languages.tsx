@@ -32,7 +32,8 @@ const Languages: React.FC<LanguageHistoryProps> = ({
       };
    }, [languageInfo]);
 
-   const toggleIsCollapsed = () => {
+   const toggleIsCollapsed = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
       setIsCollapsed(!isCollapsed);
    };
 

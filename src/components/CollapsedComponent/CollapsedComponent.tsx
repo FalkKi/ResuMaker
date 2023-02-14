@@ -5,7 +5,6 @@ import Collapse from '@mui/material/Collapse';
 import { Info } from '../../types/types';
 
 const CollapsedComponent: React.FC<Info> = (props) => {
-   console.log(props)
    return (
       <>
          {props.info.userEducationHistory ?

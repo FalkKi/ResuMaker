@@ -36,7 +36,8 @@ const EducationHistory: React.FC<EducationHistoryProps> = ({
       setEducationInfo({ ...educationInfo, [e.target.placeholder]: e.target.value })
    };
 
-   const toggleIsCollapsed = () => {
+   const toggleIsCollapsed = (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault()
       setIsCollapsed(!isCollapsed);
    };
 

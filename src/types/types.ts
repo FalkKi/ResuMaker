@@ -54,6 +54,12 @@ export interface EducationHistoryProps extends IComponentProps {
 export type StartUserInfoProps = {
    eventHandler: (e: React.ChangeEvent<HTMLInputElement>) => void,
    userInfo: User,
+};
+
+export type ProfSummaryProps = {
+   setUserInfo: (value: React.SetStateAction<User>) => void,
+   profSummary: string,
+   userInfo: User
 }
 
 export type PersonalDataProps = {
