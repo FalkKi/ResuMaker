@@ -2,10 +2,18 @@ import React from "react";
 import TextField from '@mui/material/TextField';
 import { StartUserInfoProps } from "../../types/types";
 import Box from '@mui/material/Box';
+import styles from './startUserInformation.module.css';
+import Grid from '@mui/material/Grid';
+import { height } from "@mui/system";
 
 const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
    return (
-      <div >
+      <Box
+         sx={{
+            display: 'grid',
+            gridTemplateColumns: "repeat(2, 1fr)",
+         }}>
+
          <TextField
             required
             label="Job title"
@@ -18,7 +26,10 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             label="your name"
             value={props.userInfo.firstName}
             onChange={props.eventHandler}
-            placeholder='firstName' type='text' />
+            placeholder='firstName' type='text'
+         />
+
+
          <TextField
             required
             label="your surname"
@@ -30,26 +41,34 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             label="email"
             value={props.userInfo.email}
             onChange={props.eventHandler}
-            placeholder='email' type='text' />
+            placeholder='email' type='text'
+         />
+
+
          <TextField
             required
             label="date of birth"
             value={props.userInfo.birthDate}
             onChange={props.eventHandler}
-            placeholder='birthDate' type='text' />
+            placeholder='birthDate' type='text'
+         />
          <TextField
             required
             label="country"
             value={props.userInfo.country}
             onChange={props.eventHandler}
-            placeholder='country' type='text' />
+            placeholder='country'
+            type='text'
+         />
+
          <TextField
             required
             label="city"
             value={props.userInfo.city}
             onChange={props.eventHandler}
-            placeholder='city' type='text' />
-      </div>
+            placeholder='city'
+            type='text' />
+      </Box>
    );
 };
 export default StartUserInfo;

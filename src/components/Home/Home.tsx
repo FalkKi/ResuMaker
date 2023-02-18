@@ -6,11 +6,6 @@ import PersonalDataContainer from './../PersonalData/PersonalDataContainer';
 
 
 const Home: React.FC = () => {
-   const dispatch = useAppDispatch();
-   useEffect(() => {
-      dispatch(fetchCVs());
-   }, []);
-
    return (
       <div className={styles.container}>
          <div className={styles.personInfo}>

@@ -76,3 +76,6 @@ select {
     scroll-behavior: auto !important;
   }
 }
+.personInfo{
+  position: relative;
+}

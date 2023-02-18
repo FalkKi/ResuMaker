@@ -1,4 +1,4 @@
-.container{
+.container {
    max-width: 1200px;
    padding: 15px;
    margin: 0 auto;
@@ -19,10 +19,16 @@
    object-fit: cover;
    object-position: center;
 }
-.inputFields{
+
+.withFoto {
    display: flex;
-   flex-direction: column;
 }
-.infoField{
+
+.personalData {
+   margin: 15px 0 15px 0;
+   width: 100%;
+}
+
+.infoField {
    width: 300px;
 }

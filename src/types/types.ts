@@ -1,4 +1,6 @@
 
+import SimpleMDE  from 'react-simplemde-editor';
+
 export type User = {
    imageUrl: string,
    jobTitle: string,
@@ -132,3 +134,9 @@ export interface Info {
    deleteElement: (id: string) => void,
 };
 
+export interface SimpleMdeReactProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
+  id?: string;
+  onChange?: (value: string) => void;
+  value?: string;
+}

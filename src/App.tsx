@@ -6,6 +6,7 @@ import { fetchCVs } from './requests/cvRequests';
 import { useAppDispatch, useAppSelector } from './redux/store';
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
+import FinalCV from './components/FinalCV/FinalCV';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/showCv" element={<FinalCV />} />
       </Routes>
     </>
   );

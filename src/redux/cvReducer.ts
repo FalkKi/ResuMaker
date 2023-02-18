@@ -14,6 +14,7 @@ type userInfoType = {
    educationHistory: UserEducationHistory[],
    workHistory: UserWorkHistory[],
    languages: LanguageInfoType[],
+   skills: [],
    profSummary: string,
 };
 
@@ -42,6 +43,7 @@ const initialState: initialStateType = {
          educationHistory: [],
          workHistory: [],
          languages: [],
+         skills: [],
          profSummary: '',
       },
       createdAt: '',

@@ -114,6 +114,10 @@ const PersonalDataContainer: React.FC = () => {
             getUserInfoData: getUserInfoData,
          }
       ]));
+      window.scrollTo({
+         top: 0.2,
+         behavior: "smooth",
+     });
    };
 
    const handleChangeFile = async (event: any) => {
@@ -129,6 +133,8 @@ const PersonalDataContainer: React.FC = () => {
    const onClickRemoveImage = () => {
       setUserInfo((prev: User) => ({ ...prev, imageUrl: '' }))
    };
+
+   
 
 
    return <PersonalData

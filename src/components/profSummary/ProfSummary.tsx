@@ -1,20 +1,35 @@
-import React from "react";
-import TextareaAutosize from '@mui/base/TextareaAutosize';
+import React, { useCallback, useMemo, useState } from "react";
 import { ProfSummaryProps } from "../../types/types";
 import styles from './profSummary.module.css';
+import Box from '@mui/material/Box';
+import SimpleMDE, { SimpleMdeReact } from 'react-simplemde-editor';
+import "easymde/dist/easymde.min.css";
+
 
 const ProfSummary: React.FC<ProfSummaryProps> = ({ setUserInfo, userInfo, profSummary }) => {
 
+   // const [value, setValue] = useState("");
+   // const autofocusNoSpellcheckerOptions = useMemo(() => {
+   //    return {
+   //       autofocus: true,
+   //       spellChecker: false,
+   //    } 
+   // }, []);
+
+   // const onChange = useCallback((value: string) => {
+   //    setValue(value);
+   // }, []);
+
    return (
-      <div>
-         <h3>Profile</h3>
-         <div>Write some information about you</div>
-         <TextareaAutosize
+      <Box>
+         <h3 className={styles.profSummaryTitle}>Information about you and your professional experience</h3>
+         <textarea
             className={styles.textarea}
             value={profSummary}
             onChange={(e) => setUserInfo({ ...userInfo, profSummary: e.target.value })}
          />
-      </div>
+         {/* <SimpleMdeReact value={value} onChange={onChange} /> */}
+      </Box>
    );
 };
 

@@ -1,0 +1,48 @@
+.container {
+   display: flex;
+   flex-direction: column;
+}
+
+.hiddenContainer {
+   transition: all 0.5s;
+   height: 50px;
+}
+
+.collapseButton {
+   width: 100%;
+   box-shadow: 3px 4px 0px 0px #899599;
+   background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+   background-color: #ededed;
+   border-radius: 6px;
+   border: 1px solid #d6bcd6;
+   display: inline-block;
+   cursor: pointer;
+   color: #3a8a9e;
+   font-family: Arial;
+   font-size: 17px;
+   padding: 1px 76px;
+   text-decoration: none;
+   text-shadow: 0px 0px 21px #e1e2ed;
+}
+
+.collapseButton:hover {
+   background: linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+   background-color: #bab1ba;
+}
+
+.textarea {
+   min-width: 100%;
+   min-height: 100px;
+   border: 2px solid rgb(130, 222, 238);
+   border-radius: 4px;
+   outline: none;
+   resize: none;
+   overflow: auto;
+}
+
+.topBlock {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 7px;
+}
