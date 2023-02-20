@@ -79,3 +79,8 @@ select {
 .personInfo{
   position: relative;
 }
+@font-face {
+  font-family: "Roboto";   /*Can be any text*/
+  src: local("Roboto"),
+    url("../src/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+}

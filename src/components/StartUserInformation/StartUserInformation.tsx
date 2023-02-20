@@ -28,8 +28,6 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             onChange={props.eventHandler}
             placeholder='firstName' type='text'
          />
-
-
          <TextField
             required
             label="your surname"
@@ -43,8 +41,6 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             onChange={props.eventHandler}
             placeholder='email' type='text'
          />
-
-
          <TextField
             required
             label="date of birth"

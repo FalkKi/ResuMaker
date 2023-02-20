@@ -15,6 +15,7 @@ import StartUserInfo from '../StartUserInformation/StartUserInformation';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import { generateId } from './../../utils/generateId';
+import '../../fonts/Roboto/Roboto-Regular.ttf';
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();
@@ -55,7 +56,9 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                   mr: "20px"
                },
                maxWidth: "900px",
-               margin: "auto"
+               margin: "auto",
+               fontFamily: "Roboto",
+               textTransform: 'uppercase'
             }}
          >
             <div>
