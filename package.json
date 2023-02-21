@@ -19,6 +19,7 @@
     "@types/react-dom": "^18.0.10",
     "@types/react-redux": "^7.1.25",
     "axios": "^1.2.3",
+    "babel-preset-es2015": "^6.24.1",
     "easymde": "^2.18.0",
     "module-name": "^0.0.1-security",
     "react": "^18.2.0",

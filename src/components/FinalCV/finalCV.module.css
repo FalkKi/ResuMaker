@@ -1,0 +1,26 @@
+
+.container {
+   display: flex;
+   background-color: #fff;
+   margin: auto;
+   margin-top: 20px;
+   width: 450px;
+   height: 85vh;
+   border-radius: 4px;
+}
+
+.personalInfo {
+   padding: 5px;
+   background-color: #01257D;
+   height: 100%;
+   width: 35%;
+}
+
+.userFoto {
+   height: 70px;
+   width: 70px;
+   border-radius: 4px;
+   background-color: #fff;
+   object-fit: cover;
+   object-position: center;
+}

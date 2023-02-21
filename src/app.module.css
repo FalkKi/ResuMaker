@@ -55,7 +55,7 @@ img {
 }
 
 /* Указываем понятную периодичность в потоке данных у article*/
-article > * + * {
+article>*+* {
   margin-top: 1em;
 }
 
@@ -76,11 +76,16 @@ select {
     scroll-behavior: auto !important;
   }
 }
-.personInfo{
+
+
+
+.personInfo {
   position: relative;
 }
+
 @font-face {
-  font-family: "Roboto";   /*Can be any text*/
+  font-family: "Roboto";
+  /*Can be any text*/
   src: local("Roboto"),
     url("../src/fonts/Roboto/Roboto-Regular.ttf") format("truetype");
 }

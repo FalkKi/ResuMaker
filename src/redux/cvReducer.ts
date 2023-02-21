@@ -62,7 +62,7 @@ const setCVs = createSlice({
       },
       [fetchCVs.fulfilled.toString()]: (state, action: PayloadAction<any>) => {
          console.log(action)
-         state.cvInfo = action.payload;
+         state.cvInfo = action.payload.at(-1) || {};
          state.cvInfo.status = 'loaded';
       },
       [fetchCVs.rejected.toString()]: (state: initialStateType) => {

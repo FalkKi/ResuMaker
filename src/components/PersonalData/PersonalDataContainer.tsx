@@ -41,7 +41,7 @@ const PersonalDataContainer: React.FC = () => {
    };
 
    const eventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setUserInfo({ ...userInfo, [e.target.placeholder]: e.target.value })
+      setUserInfo({ ...userInfo, [e.target.id]: e.target.value })
    };
 
    const deleteWorkHistoryElement = (id: string) => {
@@ -114,10 +114,6 @@ const PersonalDataContainer: React.FC = () => {
             getUserInfoData: getUserInfoData,
          }
       ]));
-      window.scrollTo({
-         top: 0.2,
-         behavior: "smooth",
-     });
    };
 
    const handleChangeFile = async (event: any) => {
@@ -133,8 +129,6 @@ const PersonalDataContainer: React.FC = () => {
    const onClickRemoveImage = () => {
       setUserInfo((prev: User) => ({ ...prev, imageUrl: '' }))
    };
-
-   
 
 
    return <PersonalData

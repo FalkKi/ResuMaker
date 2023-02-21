@@ -19,50 +19,49 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             label="Job title"
             value={props.userInfo.jobTitle}
             onChange={props.eventHandler}
-            placeholder='jobTitle' type='text'
+            id='jobTitle' type='text'
          />
          <TextField
             required
             label="your name"
             value={props.userInfo.firstName}
             onChange={props.eventHandler}
-            placeholder='firstName' type='text'
+            id='firstName' type='text'
          />
          <TextField
             required
             label="your surname"
             value={props.userInfo.lastName}
             onChange={props.eventHandler}
-            placeholder='lastName' type='text' />
+            id='lastName' type='text' />
          <TextField
             required
             label="email"
             value={props.userInfo.email}
             onChange={props.eventHandler}
-            placeholder='email' type='text'
+            id='email' type='text'
          />
          <TextField
             required
             label="date of birth"
             value={props.userInfo.birthDate}
             onChange={props.eventHandler}
-            placeholder='birthDate' type='text'
+            id='birthDate' type='text'
          />
          <TextField
             required
             label="country"
             value={props.userInfo.country}
             onChange={props.eventHandler}
-            placeholder='country'
+            id='country'
             type='text'
          />
-
          <TextField
             required
             label="city"
             value={props.userInfo.city}
             onChange={props.eventHandler}
-            placeholder='city'
+            id='city'
             type='text' />
       </Box>
    );
