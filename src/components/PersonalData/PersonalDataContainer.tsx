@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import { EducationHistoryType, LanguageHistoryType, LanguageInfoType, SkillsHistoryType, User, UserEducationHistory, UserSkillType, UserWorkHistory, WorkHistoryType } from "../../types/types";
 import PersonalData from "./PersonalData"
 import { generateId } from './../../utils/generateId';
@@ -27,7 +27,7 @@ const PersonalDataContainer: React.FC = () => {
    const [childrenSkillsHistoryArray, setChildrenSkillsHistoryArray] = useState<SkillsHistoryType[]>([]);
 
 
-   const getUserInfoData = (data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
+   const getUserInfoData = useCallback((data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
       param: "educationHistory" | "workHistory" | "languages" | "skills") => {
       const index = userInfo[param].findIndex(el => el.id === data.id);
       if (index !== -1) {
@@ -38,45 +38,45 @@ const PersonalDataContainer: React.FC = () => {
             [param]: [...prevState[param], data]
          }));
       };
-   };
+   }, [userInfo.workHistory, userInfo.educationHistory, userInfo.languages, userInfo.skills]);
 
    const eventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
       setUserInfo({ ...userInfo, [e.target.id]: e.target.value })
    };
 
-   const deleteWorkHistoryElement = (id: string) => {
+   const deleteWorkHistoryElement = useCallback((id: string) => {
       setChildrenWorkHistoryArray(childrenWorkHistoryArray.filter((item: WorkHistoryType) => item.id !== id));
       setUserInfo((prevState: User) => ({
          ...prevState,
          workHistory: prevState.workHistory.filter((item: UserWorkHistory) => item.id !== id)
       }));
-   };
+   }, [userInfo.workHistory]);
 
-   const deleteEducationHistoryElement = (id: string) => {
+   const deleteEducationHistoryElement = useCallback((id: string) => {
       setChildrenEducationHistoryArray(childrenEducationHistoryArray.filter((item: EducationHistoryType) => item.id !== id));
       setUserInfo((prevState: User) => ({
          ...prevState,
          educationHistory: prevState.educationHistory.filter((item: UserEducationHistory) => item.id !== id)
       }));
-   };
+   }, [userInfo.educationHistory]);
 
-   const deleteLanguageHistoryElement = (id: string) => {
+   const deleteLanguageHistoryElement = useCallback((id: string) => {
       setChildrenLanguageHistoryArray(childrenLanguageHistoryArray.filter((item: LanguageHistoryType) => item.id !== id));
       setUserInfo((prevState: User) => ({
          ...prevState,
          languages: prevState.languages.filter((item: LanguageInfoType) => item.id !== id)
       }));
-   };
+   }, [userInfo.languages]);
 
-   const deleteSkillsHistoryElement = (id: string) => {
+   const deleteSkillsHistoryElement = useCallback((id: string) => {
       setChildrenSkillsHistoryArray(childrenSkillsHistoryArray.filter((item: SkillsHistoryType) => item.id !== id));
       setUserInfo((prevState: User) => ({
          ...prevState,
          skills: prevState.skills.filter((item: UserSkillType) => item.id !== id)
       }));
-   };
+   }, [userInfo.skills]);
 
-   const addEducationChildren = () => {
+   const addEducationChildren = useCallback(() => {
       setChildrenEducationHistoryArray((prev: any) => ([
          ...prev,
          {
@@ -84,9 +84,9 @@ const PersonalDataContainer: React.FC = () => {
             getUserInfoData: getUserInfoData,
          }
       ]));
-   };
+   }, []);
 
-   const addLanguageChildren = () => {
+   const addLanguageChildren = useCallback(() => {
       setChildrenLanguageHistoryArray((prev: any) => ([
          ...prev,
          {
@@ -94,9 +94,9 @@ const PersonalDataContainer: React.FC = () => {
             getUserInfoData: getUserInfoData
          }
       ]));
-   };
+   }, []);
 
-   const addSkillsChildren = () => {
+   const addSkillsChildren = useCallback(() => {
       setChildrenSkillsHistoryArray((prev: any) => ([
          ...prev,
          {
@@ -104,9 +104,9 @@ const PersonalDataContainer: React.FC = () => {
             getUserInfoData: getUserInfoData
          }
       ]));
-   };
+   }, []);
 
-   const addMoreWorkData = () => {
+   const addMoreWorkData = useCallback(() => {
       setChildrenWorkHistoryArray((prev: any) => ([
          ...prev,
          {
@@ -114,7 +114,7 @@ const PersonalDataContainer: React.FC = () => {
             getUserInfoData: getUserInfoData,
          }
       ]));
-   };
+   }, []);
 
    const handleChangeFile = async (event: any) => {
       event.preventDefault();

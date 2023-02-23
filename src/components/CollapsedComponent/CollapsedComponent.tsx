@@ -6,7 +6,6 @@ import { Info } from '../../types/types';
 import Box from '@mui/material/Box';
 
 const CollapsedComponent: React.FC<Info> = (props) => {
-   console.log('render')
    return (
       <Box
          sx={{
