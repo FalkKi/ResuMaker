@@ -1,15 +1,12 @@
-html {
-   height: 100%;
-}
 
 
 .loader {
-   background-image: radial-gradient(circle farthest-corner at center, #3C4B57 0%, #323232 100%);
+   background-image: radial-gradient(circle farthest-corner at center, #0c4e85 0%, #323232 100%);
    position: absolute;
    top: calc(50% - 32px);
    left: calc(50% - 32px);
-   width: 64px;
-   height: 64px;
+   width: 80px;
+   height: 80px;
    border-radius: 50%;
    perspective: 800px;
 }
@@ -26,21 +23,21 @@ html {
    left: 0%;
    top: 0%;
    animation: rotate-one 1s linear infinite;
-   border-bottom: 3px solid #EFEFFA;
+   border-bottom: 10px solid #EFEFFA;
 }
 
 .inner.two {
    right: 0%;
    top: 0%;
    animation: rotate-two 1s linear infinite;
-   border-right: 3px solid #EFEFFA;
+   border-right: 10px solid #EFEFFA;
 }
 
 .inner.three {
    right: 0%;
    bottom: 0%;
    animation: rotate-three 1s linear infinite;
-   border-top: 3px solid #EFEFFA;
+   border-top: 10px solid #EFEFFA;
 }
 
 @keyframes rotate-one {

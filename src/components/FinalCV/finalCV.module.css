@@ -1,5 +1,8 @@
 
+
 .container {
+   font-family: "Roboto";
+   font-size: 12px;
    display: flex;
    background-color: #fff;
    margin: auto;
@@ -17,10 +20,75 @@
 }
 
 .userFoto {
-   height: 70px;
-   width: 70px;
+   height: 100px;
+   width: 100px;
    border-radius: 4px;
    background-color: #fff;
    object-fit: cover;
    object-position: center;
+}
+
+.personalDetails {
+   font-size: 8px;
+}
+
+.skillLevel {
+   width: 60%;
+   /* Full width */
+   background-color: rgb(221, 221, 221);
+   /* Grey background */
+}
+
+.skillGradeBasic {
+   text-align: right;
+   height: 10px;
+   /* Right-align text */
+   padding-right: 20px;
+   /* Add some right padding */
+   line-height: 40px;
+   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
+   color: white;
+   /* White text color */
+   width: 30%;
+   background-color: #4CAF50;
+}
+.skillGradeStudent {
+   text-align: right;
+   height: 10px;
+   /* Right-align text */
+   padding-right: 20px;
+   /* Add some right padding */
+   line-height: 40px;
+   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
+   color: white;
+   /* White text color */
+   width: 10%;
+   background-color: #4CAF50;
+}
+.skillGradeMedium{
+   text-align: right;
+   height: 10px;
+   /* Right-align text */
+   padding-right: 20px;
+   /* Add some right padding */
+   line-height: 40px;
+   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
+   color: white;
+   /* White text color */
+   width: 65%;
+   background-color: #4CAF50;
+}
+
+.skillGradeProfi{
+   text-align: right;
+   height: 10px;
+   /* Right-align text */
+   padding-right: 20px;
+   /* Add some right padding */
+   line-height: 40px;
+   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
+   color: white;
+   /* White text color */
+   width: 100%;
+   background-color: #4CAF50;
 }

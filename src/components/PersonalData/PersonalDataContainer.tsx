@@ -1,10 +1,27 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import { EducationHistoryType, LanguageHistoryType, LanguageInfoType, SkillsHistoryType, User, UserEducationHistory, UserSkillType, UserWorkHistory, WorkHistoryType } from "../../types/types";
 import PersonalData from "./PersonalData"
 import { generateId } from './../../utils/generateId';
 import instance from './../../requests/mainAxios';
+import { useAppDispatch, useAppSelector } from './../../redux/store';
+import { fetchCVs } from './../../requests/cvRequests';
+import { PayloadAction } from '@reduxjs/toolkit';
+import Preloader from './../Preloader/Preloader';
 
 const PersonalDataContainer: React.FC = () => {
+   const dispatch = useAppDispatch();
+   const isLoaded = useAppSelector(state => state.setCVs.cvInfo.status);
+   console.log(isLoaded)
+   // useEffect(() => {
+   //    dispatch(fetchCVs()).then((data: PayloadAction<any>) => {
+   //       const lastCv = data.payload.at(-1).userInfo;
+   //       setUserInfo((prev: User) => ({
+   //          ...prev,
+   //          ...lastCv
+   //       }))
+   //    });
+   // }, []);
+
    const [userInfo, setUserInfo] = useState<User>({
       imageUrl: '',
       jobTitle: '',
@@ -20,6 +37,8 @@ const PersonalDataContainer: React.FC = () => {
       languages: [],
       skills: [],
    });
+
+
    console.log(userInfo)
    const [childrenWorkHistoryArray, setChildrenWorkHistoryArray] = useState<WorkHistoryType[]>([]);
    const [childrenEducationHistoryArray, setChildrenEducationHistoryArray] = useState<EducationHistoryType[]>([]);
@@ -77,7 +96,7 @@ const PersonalDataContainer: React.FC = () => {
    }, [userInfo.skills]);
 
    const addEducationChildren = useCallback(() => {
-      setChildrenEducationHistoryArray((prev: any) => ([
+      setChildrenEducationHistoryArray((prev: EducationHistoryType[]) => ([
          ...prev,
          {
             id: generateId(),
@@ -87,7 +106,7 @@ const PersonalDataContainer: React.FC = () => {
    }, []);
 
    const addLanguageChildren = useCallback(() => {
-      setChildrenLanguageHistoryArray((prev: any) => ([
+      setChildrenLanguageHistoryArray((prev: LanguageHistoryType[]) => ([
          ...prev,
          {
             id: generateId(),
@@ -97,7 +116,7 @@ const PersonalDataContainer: React.FC = () => {
    }, []);
 
    const addSkillsChildren = useCallback(() => {
-      setChildrenSkillsHistoryArray((prev: any) => ([
+      setChildrenSkillsHistoryArray((prev: SkillsHistoryType[]) => ([
          ...prev,
          {
             id: generateId(),
@@ -107,7 +126,7 @@ const PersonalDataContainer: React.FC = () => {
    }, []);
 
    const addMoreWorkData = useCallback(() => {
-      setChildrenWorkHistoryArray((prev: any) => ([
+      setChildrenWorkHistoryArray((prev: WorkHistoryType[]) => ([
          ...prev,
          {
             id: generateId(),
@@ -131,30 +150,34 @@ const PersonalDataContainer: React.FC = () => {
    };
 
 
-   return <PersonalData
-      userInfo={userInfo}
-      setUserInfo={setUserInfo}
-      childrenWorkHistoryArray={childrenWorkHistoryArray}
-      childrenEducationHistoryArray={childrenEducationHistoryArray}
-      childrenLanguageHistoryArray={childrenLanguageHistoryArray}
-      childrenSkillsHistoryArray={childrenSkillsHistoryArray}
-      setChildrenWorkHistoryArray={setChildrenWorkHistoryArray}
-      setChildrenEducationHistoryArray={setChildrenEducationHistoryArray}
-      setChildrenLanguageHistoryArray={setChildrenLanguageHistoryArray}
-      setChildrenSkillsHistoryArray={setChildrenSkillsHistoryArray}
-      getUserInfoData={getUserInfoData}
-      eventHandler={eventHandler}
-      deleteWorkHistoryElement={deleteWorkHistoryElement}
-      deleteEducationHistoryElement={deleteEducationHistoryElement}
-      deleteLanguageHistoryElement={deleteLanguageHistoryElement}
-      deleteSkillsHistoryElement={deleteSkillsHistoryElement}
-      addEducationChildren={addEducationChildren}
-      addLanguageChildren={addLanguageChildren}
-      addSkillsChildren={addSkillsChildren}
-      addMoreWorkData={addMoreWorkData}
-      handleChangeFile={handleChangeFile}
-      onClickRemoveImage={onClickRemoveImage}
-   />
+   return (
+      <>
+         <PersonalData
+            userInfo={userInfo}
+            setUserInfo={setUserInfo}
+            childrenWorkHistoryArray={childrenWorkHistoryArray}
+            childrenEducationHistoryArray={childrenEducationHistoryArray}
+            childrenLanguageHistoryArray={childrenLanguageHistoryArray}
+            childrenSkillsHistoryArray={childrenSkillsHistoryArray}
+            setChildrenWorkHistoryArray={setChildrenWorkHistoryArray}
+            setChildrenEducationHistoryArray={setChildrenEducationHistoryArray}
+            setChildrenLanguageHistoryArray={setChildrenLanguageHistoryArray}
+            setChildrenSkillsHistoryArray={setChildrenSkillsHistoryArray}
+            getUserInfoData={getUserInfoData}
+            eventHandler={eventHandler}
+            deleteWorkHistoryElement={deleteWorkHistoryElement}
+            deleteEducationHistoryElement={deleteEducationHistoryElement}
+            deleteLanguageHistoryElement={deleteLanguageHistoryElement}
+            deleteSkillsHistoryElement={deleteSkillsHistoryElement}
+            addEducationChildren={addEducationChildren}
+            addLanguageChildren={addLanguageChildren}
+            addSkillsChildren={addSkillsChildren}
+            addMoreWorkData={addMoreWorkData}
+            handleChangeFile={handleChangeFile}
+            onClickRemoveImage={onClickRemoveImage}
+         />
+      </>
+   );
 };
 
 export default PersonalDataContainer;

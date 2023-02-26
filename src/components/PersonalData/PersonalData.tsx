@@ -1,8 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Button from '@mui/material/Button';
 import styles from './personalData.module.css';
 import { postCV } from '../../requests/cvRequests';
-import { useAppDispatch } from '../../redux/store';
+import { useAppDispatch, useAppSelector } from '../../redux/store';
 import Avatar from '@mui/material/Avatar';
 import ProfSummary from './../profSummary/ProfSummary';
 import WorkHistory from '../Histories/workHistiory/WorkHistory';
@@ -14,8 +14,8 @@ import Skills from '../Histories/Skills/Skills';
 import StartUserInfo from '../StartUserInformation/StartUserInformation';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
-import { generateId } from './../../utils/generateId';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
+import { fetchCVs } from './../../requests/cvRequests';
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();
@@ -30,15 +30,6 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
       navigate('/showCv');
    };
 
-   const addMoreWorkData = () => {
-      props.setChildrenWorkHistoryArray((prev: any) => ([
-         ...prev,
-         {
-            id: generateId(),
-            getUserInfoData: props.getUserInfoData,
-         }
-      ]));
-   };
 
    const isButtonDisabled = () => {
       return !(props.userInfo.jobTitle !== '' && props.userInfo.firstName !== ''
@@ -108,7 +99,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                         />
                      ))}
                   </div>
-                  <Button sx={{ mb: '15px' }} fullWidth onClick={addMoreWorkData} variant='outlined'>
+                  <Button sx={{ mb: '15px' }} fullWidth onClick={props.addMoreWorkData} variant='outlined'>
                      {props.childrenWorkHistoryArray.length > 0 ? 'Add More Work history' : 'Add Work history'}
                   </Button>
                   <>

@@ -3,8 +3,7 @@ import TextField from '@mui/material/TextField';
 import { StartUserInfoProps } from "../../types/types";
 import Box from '@mui/material/Box';
 import styles from './startUserInformation.module.css';
-import Grid from '@mui/material/Grid';
-import { height } from "@mui/system";
+
 
 const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
    return (
