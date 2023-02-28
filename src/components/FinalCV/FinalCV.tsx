@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
+import user from '../../pictures/user.svg';
 
 
 const FinalCV: React.FC = () => {
@@ -33,12 +34,52 @@ const FinalCV: React.FC = () => {
             <div className={styles.container}>
 
                <section className={styles.personalInfo}>
-                  <img className={styles.userFoto} src={`http://localhost:4434${userCvs.userInfo.imageUrl}`} alt="" />
-                  <p>{userCvs.userInfo.jobTitle}</p>
-                  <p>{userCvs.userInfo.email}</p>
-                  <p>{userCvs.userInfo.birthDate}</p>
-                  <p>{userCvs.userInfo.country}</p>
-                  <p>{userCvs.userInfo.city}</p>
+                  {userCvs.userInfo.imageUrl !== '' ?
+                     <img className={styles.userFoto} src={`http://localhost:4434${userCvs.userInfo.imageUrl}`} alt="loadedUser" />
+                     : <img className={styles.userFoto} src={user} alt="user" />}
+                  <div className={styles.firstInfo}>
+                     <p>{userCvs.userInfo.firstName} {userCvs.userInfo.lastName}</p>
+                     <p>{userCvs.userInfo.jobTitle}</p>
+                     <p>{userCvs.userInfo.email}</p>
+                     <p>{userCvs.userInfo.birthDate}</p>
+                     <p>{userCvs.userInfo.country}</p>
+                     <p>{userCvs.userInfo.city}</p>
+                  </div>
+                  <div className={styles.userAbilities}>
+                     <div className={styles.userAbility}>
+                        <h3 className={styles.cvTitle}>Languages</h3>
+                        <ul>
+                           {userCvs.userInfo.languages.map((el) => {
+                              return (
+                                 <li className={styles.personalInfoList} key={el.id}>
+                                    <span>{el.languageName}</span> - <span>{el.level}</span>
+                                 </li>
+                              )
+                           })}
+                        </ul>
+                     </div>
+                     <div className={styles.userAbility}>
+                        <h3 className={styles.cvTitle}>Skills</h3>
+                        <ul>
+                           {userCvs.userInfo.skills.map((el) => {
+                              return (
+                                 <div key={el.id}>
+                                    <li className={styles.personalInfoList} key={el.id}>
+                                       <span>{el.skillName}</span> - <span>{el.skillLevel}</span>
+                                    </li>
+                                    <div className={styles.skillLevel}>
+                                       {el.skillLevel === 'Student' ? <div className={styles.skillGradeStudent}></div> : null}
+                                       {el.skillLevel === 'Basic skills' ? <div className={styles.skillGradeBasic}></div> : null}
+                                       {el.skillLevel === 'Medium' ? <div className={styles.skillGradeMedium}></div> : null}
+                                       {el.skillLevel === 'Professional' ? <div className={styles.skillGradeProfi}></div> : null}
+                                    </div>
+                                 </div>
+                              )
+                           })}
+                        </ul>
+
+                     </div>
+                  </div>
                </section>
                <section className={styles.personalDetails}>
                   <div>
@@ -76,41 +117,8 @@ const FinalCV: React.FC = () => {
                         })}
                      </ul>
                   </div>
-                  <div>
-                     <h3>Languages</h3>
-                     <ul>
-                        {userCvs.userInfo.languages.map((el) => {
-                           return (
-                              <li key={el.id}>
-                                 <h3>{el.languageName}</h3>
-                                 <p>{el.level}</p>
-                              </li>
-                           )
-                        })}
-                     </ul>
-                  </div>
-                  <div>
-                     <h3>Skills</h3>
-                     <ul>
-                        {userCvs.userInfo.skills.map((el) => {
-                           return (
-                              <div key={el.id}>
-                                 <li key={el.id}>
-                                    <h3>{el.skillName}</h3>
-                                    <p>{el.skillLevel}</p>
-                                 </li>
-                                 <div className={styles.skillLevel}>
-                                    {el.skillLevel === 'Student' ? <div className={styles.skillGradeStudent}></div> : null}
-                                    {el.skillLevel === 'Basic skills' ? <div className={styles.skillGradeBasic}></div> : null}
-                                    {el.skillLevel === 'Medium' ? <div className={styles.skillGradeMedium}></div> : null}
-                                    {el.skillLevel === 'Professional' ? <div className={styles.skillGradeProfi}></div> : null}
-                                 </div>
-                              </div>
-                           )
-                        })}
-                     </ul>
 
-                  </div>
+
                </section>
             </div>
             <div>

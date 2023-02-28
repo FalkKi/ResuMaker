@@ -15,7 +15,7 @@ import StartUserInfo from '../StartUserInformation/StartUserInformation';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
-import { fetchCVs } from './../../requests/cvRequests';
+import deleteBtn from '../../pictures/deleteBtn.svg';
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();
@@ -59,10 +59,10 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                      <img className={styles.image} src={`http://localhost:4434${props.userInfo.imageUrl}`} alt="Uploaded" />
                      <Button sx={{
                         width: '50px',
-                        height: '30px',
+                        height: '50px',
                         ml: '10px'
                      }} onClick={props.onClickRemoveImage} variant="contained" color="error">
-                        Delete
+                        <img src={deleteBtn} alt="" />
                      </Button>
                   </div>
                ) : <Button variant='contained' className={styles.imageButton} onClick={() => { inputFileRef.current !== null ? inputFileRef.current.click() : null }} size="medium">

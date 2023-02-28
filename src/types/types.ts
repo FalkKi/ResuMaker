@@ -1,5 +1,6 @@
 
-import SimpleMDE  from 'react-simplemde-editor';
+import SimpleMDE from 'react-simplemde-editor';
+import { initialStateType } from '../redux/cvReducer';
 
 export type User = {
    imageUrl: string,
@@ -134,3 +135,28 @@ export interface Info {
    deleteElement: (id: string) => void,
 };
 
+export type ActionPayloadType = {
+   type: string,
+   meta: object,
+   payload: Array<{
+      _id: '',
+      status: 'loading',
+      userInfo: {
+         imageUrl: '',
+         birthDate: '',
+         city: '',
+         country: '',
+         email: '',
+         firstName: '',
+         jobTitle: '',
+         lastName: '',
+         educationHistory: [],
+         workHistory: [],
+         languages: [],
+         skills: [],
+         profSummary: '',
+      },
+      createdAt: '',
+      updatedAt: '',
+   }>
+}

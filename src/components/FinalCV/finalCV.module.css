@@ -1,4 +1,102 @@
+* {
+   padding: 0;
+   margin: 0;
+   border: 0;
+}
 
+
+*,
+*:before,
+*:after {
+   -webkit-box-sizing: border-box;
+   -moz-box-sizing: border-box;
+   box-sizing: border-box;
+}
+
+
+:focus,
+:active {
+   outline: none;
+}
+
+a:focus,
+a:active {
+   outline: none;
+}
+
+
+nav,
+footer,
+header,
+aside {
+   display: block;
+}
+
+
+html,
+body {
+   height: 100%;
+   width: 100%;
+   font-size: 100%;
+   line-height: 1;
+   font-size: 14px;
+   -ms-text-size-adjust: 100%;
+   -moz-text-size-adjust: 100%;
+   -webkit-text-size-adjust: 100%;
+}
+
+
+input,
+button,
+textarea {
+   font-family: inherit;
+}
+
+
+input::-ms-clear {
+   display: none;
+}
+
+button {
+   cursor: pointer;
+}
+
+button::-moz-focus-inner {
+   padding: 0;
+   border: 0;
+}
+
+a,
+a:visited {
+   text-decoration: none;
+}
+
+a:hover {
+   text-decoration: none;
+}
+
+ul li {
+   list-style: none;
+}
+
+img {
+   vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+   font-size: inherit;
+   font-weight: 400;
+}
+@font-face {
+   font-family: "Roboto";
+   src: local("Roboto"),
+     url("../../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+ }
 
 .container {
    font-family: "Roboto";
@@ -13,7 +111,8 @@
 }
 
 .personalInfo {
-   padding: 5px;
+   color: #fff;
+   padding: 8px;
    background-color: #01257D;
    height: 100%;
    width: 35%;
@@ -28,67 +127,80 @@
    object-position: center;
 }
 
+.firstInfo {
+   margin-top: 8px;
+   color: #fff;
+   font-weight: 700;
+}
+
+.firstInfo>*:not(:last-child) {
+   display: block;
+   margin-bottom: 5px;
+}
+
+.userAbilities {
+   margin-top: 10px;
+   font-size: 10px;
+}
+
+.cvTitle {
+   text-transform: uppercase;
+   margin: 5px 0 5px 0;
+}
+
 .personalDetails {
    font-size: 8px;
 }
 
+.personalInfoList {
+   margin: 5px 0 5px 0;
+}
+.userAbility{
+   margin-bottom: 20px;
+   border-bottom: 1px dotted white;
+}
 .skillLevel {
+   margin-bottom: 5px;
    width: 60%;
-   /* Full width */
    background-color: rgb(221, 221, 221);
-   /* Grey background */
 }
 
 .skillGradeBasic {
    text-align: right;
    height: 10px;
-   /* Right-align text */
    padding-right: 20px;
-   /* Add some right padding */
    line-height: 40px;
-   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
    color: white;
-   /* White text color */
    width: 30%;
    background-color: #4CAF50;
 }
+
 .skillGradeStudent {
    text-align: right;
    height: 10px;
-   /* Right-align text */
    padding-right: 20px;
-   /* Add some right padding */
    line-height: 40px;
-   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
    color: white;
-   /* White text color */
    width: 10%;
    background-color: #4CAF50;
 }
-.skillGradeMedium{
+
+.skillGradeMedium {
    text-align: right;
    height: 10px;
-   /* Right-align text */
    padding-right: 20px;
-   /* Add some right padding */
    line-height: 40px;
-   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
    color: white;
-   /* White text color */
    width: 65%;
    background-color: #4CAF50;
 }
 
-.skillGradeProfi{
+.skillGradeProfi {
    text-align: right;
    height: 10px;
-   /* Right-align text */
    padding-right: 20px;
-   /* Add some right padding */
    line-height: 40px;
-   /* Set the line-height to center the text inside the skill bar, and to expand the height of the container */
    color: white;
-   /* White text color */
    width: 100%;
    background-color: #4CAF50;
 }

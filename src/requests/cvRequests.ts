@@ -4,17 +4,25 @@ import { User } from "../types/types";
 
 
 export const fetchCVs = createAsyncThunk('makecv/fetchCVs', async () => {
-
-      const { data } = await instance.get<User[]>('/makecv');
-      console.log(data)
-      return data;
-
+      try {
+            const { data } = await instance.get<User[]>('/makecv');
+            console.log(data)
+            return data;
+      } catch (err) {
+            console.log(err)
+            alert('Please check your intenet connection')
+      };
 });
 
 export const postCV = createAsyncThunk('makecv/postCV', async (info: User) => {
-      const { data } = await instance.post<User>('/makecv', info);
-      console.log(data)
-      return data;
+      try {
+            const { data } = await instance.post<User>('/makecv', info);
+            console.log(data)
+            return data;
+      } catch (err) {
+            console.log(err)
+            alert('Please check your intenet connection')
+      }
 });
 
 

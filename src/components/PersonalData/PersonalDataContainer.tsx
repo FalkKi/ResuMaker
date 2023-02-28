@@ -6,21 +6,38 @@ import instance from './../../requests/mainAxios';
 import { useAppDispatch, useAppSelector } from './../../redux/store';
 import { fetchCVs } from './../../requests/cvRequests';
 import { PayloadAction } from '@reduxjs/toolkit';
-import Preloader from './../Preloader/Preloader';
 
 const PersonalDataContainer: React.FC = () => {
    const dispatch = useAppDispatch();
    const isLoaded = useAppSelector(state => state.setCVs.cvInfo.status);
+   const initCv = useAppSelector(state => state.setCVs.cvInfo.userInfo);
    console.log(isLoaded)
-   // useEffect(() => {
-   //    dispatch(fetchCVs()).then((data: PayloadAction<any>) => {
-   //       const lastCv = data.payload.at(-1).userInfo;
-   //       setUserInfo((prev: User) => ({
-   //          ...prev,
-   //          ...lastCv
-   //       }))
-   //    });
-   // }, []);
+   useEffect(() => {
+      dispatch(fetchCVs()).then((data: PayloadAction<any>) => {
+         console.log(data)
+         if (!data.payload) {
+            setUserInfo((prev: User) => ({
+               ...prev,
+               ...initCv
+            }))
+         }
+         if (data.payload) {
+            const lastCv = data.payload.at(-1).userInfo;
+            setUserInfo((prev: User) => ({
+               ...prev,
+               firstName: lastCv.firstName,
+               lastName: lastCv.lastName,
+               jobTitle: lastCv.jobTitle,
+               city: lastCv.city,
+               country: lastCv.country,
+               email: lastCv.email,
+               birthDate: lastCv.birthDate,
+               profSummary: lastCv.profSummary,
+               imageUrl: lastCv.imageUrl,
+            }))
+         }
+      });
+   }, []);
 
    const [userInfo, setUserInfo] = useState<User>({
       imageUrl: '',
@@ -141,8 +158,13 @@ const PersonalDataContainer: React.FC = () => {
       if (!file) return
       const formData = new FormData();
       formData.append('image', file);
-      const { data } = await instance.post('/upload', formData);
-      setUserInfo({ ...userInfo, imageUrl: data.url });
+      try {
+         const { data } = await instance.post('/upload', formData);
+         setUserInfo({ ...userInfo, imageUrl: data.url });
+      } catch (err) {
+         console.log(err)
+         alert('Please check your intenet connection')
+      }
    };
 
    const onClickRemoveImage = () => {

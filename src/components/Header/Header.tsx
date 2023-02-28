@@ -8,7 +8,7 @@ const Header: React.FC = () => {
       <>
          <header className={styles.headerWrapper}>
             <div className={styles.container}>
-               <img src={logo} alt='logo' className={styles.logo}></img>
+               <a href="https://github.com/FalkKi"><img src={logo} alt='logo' className={styles.logo}></img></a>
             </div>
          </header>
       </>
