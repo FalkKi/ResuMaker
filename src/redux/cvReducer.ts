@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {  User } from "../types/types";
+import { LanguageInfoType, User, UserEducationHistory, UserSkillType, UserWorkHistory } from "../types/types";
 import { fetchCVs } from './../requests/cvRequests';
 
 
@@ -10,9 +10,10 @@ export type initialStateType = {
       userInfo: User,
       createdAt: string,
       updatedAt: string,
-   };
+   }
 };
- const initialState: initialStateType = {
+
+const initialState: initialStateType = {
    cvInfo: {
       _id: '',
       status: 'loading',
@@ -36,6 +37,15 @@ export type initialStateType = {
    }
 };
 
+export type ActionPayloadType = {
+   status: string,
+   _id: string,
+   _v: number,
+   userInfo: User,
+   createdAt: string,
+   updatedAt: string,
+}
+
 const setCVs = createSlice({
    name: 'setCVs',
    initialState,
@@ -45,10 +55,10 @@ const setCVs = createSlice({
       [fetchCVs.pending.toString()]: (state: initialStateType) => {
          state.cvInfo.status = 'loading';
       },
-      [fetchCVs.fulfilled.toString()]: (state, action: PayloadAction<any>) => {
+      [fetchCVs.fulfilled.toString()]: (state, action: PayloadAction<ActionPayloadType[]>) => {
          console.log(action)
          if (action.payload && action.payload.length > 0) {
-            state.cvInfo = action.payload.at(-1); //here
+            state.cvInfo = action.payload[action.payload.length - 1]; 
             state.cvInfo.status = 'loaded';
          }
          if (!action.payload || action.payload.length === 0) {

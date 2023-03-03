@@ -92,24 +92,27 @@ h6 {
    font-size: inherit;
    font-weight: 400;
 }
+
 @font-face {
    font-family: "Roboto";
    src: local("Roboto"),
-     url("../../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
- }
+      url("../../fonts/Roboto/Roboto-Medium.ttf") format("truetype");
+}
 
 .container {
-   font-family: "Roboto";
    font-size: 12px;
    display: flex;
    background-color: #fff;
    margin: auto;
-   margin-top: 20px;
+   margin-top: 10px;
    width: 450px;
    height: 85vh;
    border-radius: 4px;
+  
 }
-
+.pdfContainer{
+   margin: auto;
+}
 .personalInfo {
    color: #fff;
    padding: 8px;
@@ -130,7 +133,7 @@ h6 {
 .firstInfo {
    margin-top: 8px;
    color: #fff;
-   font-weight: 700;
+   font-weight: 500;
 }
 
 .firstInfo>*:not(:last-child) {
@@ -149,16 +152,48 @@ h6 {
 }
 
 .personalDetails {
-   font-size: 8px;
+   background-color: white;
+   font-size: 10px;
+   padding: 10px 15px 0 5px;
+}
+
+.personalDetails h3 {
+   color: #01257D;
+   font-weight: 700;
+   text-transform: uppercase;
+   margin-bottom: 5px;
+}
+
+.personalDetails h4 {
+   font-weight: 700;
+   margin-bottom: 5px;
+}
+.userHistoryListFlex{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.userHistory {
+   margin-bottom: 5px;
+}
+
+.userHistoryList li {
+   margin-bottom: 5px;
+}
+.userHistoryList li p{
+   margin-bottom: 3px;
 }
 
 .personalInfoList {
    margin: 5px 0 5px 0;
 }
-.userAbility{
+
+.userAbility {
    margin-bottom: 20px;
    border-bottom: 1px dotted white;
 }
+
 .skillLevel {
    margin-bottom: 5px;
    width: 60%;
@@ -202,5 +237,8 @@ h6 {
    line-height: 40px;
    color: white;
    width: 100%;
+   background-color: #4CAF50;
+}
+.k-pdf-export p{
    background-color: #4CAF50;
 }

@@ -1,0 +1,44 @@
+@font-face {
+   font-family: "Roboto";
+   /*Can be any text*/
+   src: local("Roboto"),
+      url("../../fonts/Roboto/Roboto-Bold.ttf") format("truetype");
+}
+
+.homeBtn {
+   font-family: Roboto;
+   font-weight: 0;
+   font-size: 16px;
+   color: #ffffff;
+   background: linear-gradient(90deg, #0066CC 0%, #d62828 100%);
+   padding: 10px 47px;
+   border: none;
+   box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+   border-radius: 22px 50px;
+   transition: 327ms;
+   transform: translateY(0);
+   margin-right: 30px;
+   margin-bottom: 30px;
+}
+
+.homeBtn:last-child {
+   margin-right: 0;
+}
+
+.homeBtn:hover {
+   transition: 327ms;
+   padding: 10px 50px;
+   transform: translateY(-0px);
+   background: linear-gradient(90deg, #0066CC 0%, #d62828 100%);
+   color: #ffffff;
+   border: none;
+}
+
+.btnContainer {
+   margin: auto;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   margin-right: -50%;
+   transform: translate(-50%, -50%)
+}

@@ -13,25 +13,38 @@ import Languages from '../Histories/Languages/Languages';
 import Skills from '../Histories/Skills/Skills';
 import StartUserInfo from '../StartUserInformation/StartUserInformation';
 import Box from '@mui/material/Box';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
 import deleteBtn from '../../pictures/deleteBtn.svg';
+import { updateCV } from './../../requests/cvRequests';
+import instance from './../../requests/mainAxios';
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
+   console.log(props.id)
    const dispatch = useAppDispatch();
    const inputFileRef = useRef<HTMLInputElement>(null);
    const listRef = useRef<HTMLDivElement | null>(null);
    const navigate = useNavigate();
-
-   const createResume = (e: React.MouseEvent<HTMLButtonElement>) => {
-      console.log(e)
+   
+   const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault()
-      dispatch(postCV(props.userInfo));
-      navigate('/showCv');
+      if (!props.id) {
+         dispatch(postCV(props.userInfo));
+         navigate(`/showCv`);
+      }
+      if (props.id) {
+         try {
+            await instance.patch(`/makecv/${props.id}`, props.userInfo);
+            navigate(`/showCv/${props.id}`);
+         } catch (err) {
+            console.log(err);
+         };
+      };
    };
 
 
    const isButtonDisabled = () => {
+      
       return !(props.userInfo.jobTitle !== '' && props.userInfo.firstName !== ''
          && props.userInfo.lastName !== '' && props.userInfo.email !== '' && props.userInfo.country
          && props.userInfo.city !== '' && props.userInfo.birthDate !== '' && props.userInfo.profSummary !== '');
@@ -62,7 +75,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                         height: '50px',
                         ml: '10px'
                      }} onClick={props.onClickRemoveImage} variant="contained" color="error">
-                        <img src={deleteBtn} alt="" />
+                        <img className={styles.deleteBtnImg} src={deleteBtn} alt="" />
                      </Button>
                   </div>
                ) : <Button variant='contained' className={styles.imageButton} onClick={() => { inputFileRef.current !== null ? inputFileRef.current.click() : null }} size="medium">

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useReducer, useState } from "react"
 import { EducationHistoryType, LanguageHistoryType, LanguageInfoType, SkillsHistoryType, User, UserEducationHistory, UserSkillType, UserWorkHistory, WorkHistoryType } from "../../types/types";
 import PersonalData from "./PersonalData"
 import { generateId } from './../../utils/generateId';
@@ -6,38 +6,39 @@ import instance from './../../requests/mainAxios';
 import { useAppDispatch, useAppSelector } from './../../redux/store';
 import { fetchCVs } from './../../requests/cvRequests';
 import { PayloadAction } from '@reduxjs/toolkit';
+import { ActionPayloadType } from "../../redux/cvReducer";
 
 const PersonalDataContainer: React.FC = () => {
    const dispatch = useAppDispatch();
    const isLoaded = useAppSelector(state => state.setCVs.cvInfo.status);
    const initCv = useAppSelector(state => state.setCVs.cvInfo.userInfo);
-   console.log(isLoaded)
+   const [id, setId] = useState(null);
+
    useEffect(() => {
-      dispatch(fetchCVs()).then((data: PayloadAction<any>) => {
-         console.log(data)
-         if (!data.payload) {
+      dispatch(fetchCVs()).then((data: any) => {
+         if (data.payload && data.payload.length > 0) {
+            console.log(data.payload)
+            setId(data.payload[0]._id)
             setUserInfo((prev: User) => ({
                ...prev,
-               ...initCv
-            }))
-         }
-         if (data.payload) {
-            const lastCv = data.payload.at(-1).userInfo;
-            setUserInfo((prev: User) => ({
-               ...prev,
-               firstName: lastCv.firstName,
-               lastName: lastCv.lastName,
-               jobTitle: lastCv.jobTitle,
-               city: lastCv.city,
-               country: lastCv.country,
-               email: lastCv.email,
-               birthDate: lastCv.birthDate,
-               profSummary: lastCv.profSummary,
-               imageUrl: lastCv.imageUrl,
-            }))
-         }
+               imageUrl: data.payload[0].userInfo.imageUrl,
+               jobTitle: data.payload[0].userInfo.jobTitle,
+               firstName: data.payload[0].userInfo.firstName,
+               lastName: data.payload[0].userInfo.lastName,
+               profSummary: data.payload[0].userInfo.profSummary,
+               city: data.payload[0].userInfo.city,
+               country: data.payload[0].userInfo.country,
+               birthDate: data.payload[0].userInfo.birthDate,
+               email: data.payload[0].userInfo.email,
+               workHistory: data.payload[0].userInfo.workHistory,
+               educationHistory: data.payload[0].userInfo.educationHistory,
+               skills: data.payload[0].userInfo.skills,
+               languages: data.payload[0].userInfo.languages,
+            }));
+         };
       });
    }, []);
+   console.log(id);
 
    const [userInfo, setUserInfo] = useState<User>({
       imageUrl: '',
@@ -55,14 +56,13 @@ const PersonalDataContainer: React.FC = () => {
       skills: [],
    });
 
-
    console.log(userInfo)
    const [childrenWorkHistoryArray, setChildrenWorkHistoryArray] = useState<WorkHistoryType[]>([]);
    const [childrenEducationHistoryArray, setChildrenEducationHistoryArray] = useState<EducationHistoryType[]>([]);
    const [childrenLanguageHistoryArray, setChildrenLanguageHistoryArray] = useState<LanguageHistoryType[]>([]);
    const [childrenSkillsHistoryArray, setChildrenSkillsHistoryArray] = useState<SkillsHistoryType[]>([]);
 
-
+   
    const getUserInfoData = useCallback((data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
       param: "educationHistory" | "workHistory" | "languages" | "skills") => {
       const index = userInfo[param].findIndex(el => el.id === data.id);
@@ -176,6 +176,7 @@ const PersonalDataContainer: React.FC = () => {
       <>
          <PersonalData
             userInfo={userInfo}
+            id={id}
             setUserInfo={setUserInfo}
             childrenWorkHistoryArray={childrenWorkHistoryArray}
             childrenEducationHistoryArray={childrenEducationHistoryArray}

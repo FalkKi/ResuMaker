@@ -66,6 +66,7 @@ export type ProfSummaryProps = {
 }
 
 export type PersonalDataProps = {
+   id: string | null,
    userInfo: User,
    setUserInfo: React.Dispatch<React.SetStateAction<any>>,
    childrenWorkHistoryArray: WorkHistoryType[],
@@ -135,28 +136,3 @@ export interface Info {
    deleteElement: (id: string) => void,
 };
 
-export type ActionPayloadType = {
-   type: string,
-   meta: object,
-   payload: Array<{
-      _id: '',
-      status: 'loading',
-      userInfo: {
-         imageUrl: '',
-         birthDate: '',
-         city: '',
-         country: '',
-         email: '',
-         firstName: '',
-         jobTitle: '',
-         lastName: '',
-         educationHistory: [],
-         workHistory: [],
-         languages: [],
-         skills: [],
-         profSummary: '',
-      },
-      createdAt: '',
-      updatedAt: '',
-   }>
-}
