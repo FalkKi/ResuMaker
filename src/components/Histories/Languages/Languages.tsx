@@ -36,7 +36,7 @@ const Languages: React.FC<LanguageHistoryProps> = ({
       e.preventDefault();
       setIsCollapsed(!isCollapsed);
    };
-
+   
    return (
       <>
          <CollapsedComponent
@@ -61,13 +61,13 @@ const Languages: React.FC<LanguageHistoryProps> = ({
                   display: 'grid',
                   gridTemplateColumns: 'repeat(2, 1fr)'
                }}>
-               
-                  <TextField
-                     label="language"
-                     value={languageInfo.languageName}
-                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setlanguageInfo({ ...languageInfo, languageName: e.target.value })}
-                  />
-               <FormControl sx={{mt: '15px'}} fullWidth>
+
+               <TextField
+                  label="language"
+                  value={languageInfo.languageName}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => setlanguageInfo({ ...languageInfo, languageName: e.target.value })}
+               />
+               <FormControl sx={{ mt: '15px' }} fullWidth>
                   <InputLabel>Skill Level</InputLabel>
                   <Select
                      labelId="demo-select-small"
@@ -89,4 +89,4 @@ const Languages: React.FC<LanguageHistoryProps> = ({
    );
 };
 
-export default Languages;
+export default React.memo(Languages);

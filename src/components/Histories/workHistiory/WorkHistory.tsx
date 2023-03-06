@@ -23,6 +23,7 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
       endDate: '',
       description: '',
    });
+
    const [isCollapsed, setIsCollapsed] = useState<boolean | undefined>(true);
 
    useEffect(() => {
@@ -98,9 +99,8 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
                value={workHistory.description}
                id="description"
             />
-
          </Collapse >
       </>
    );
 };
-export default WorkHistory;
+export default React.memo(WorkHistory);

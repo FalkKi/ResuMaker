@@ -55,6 +55,7 @@ export interface EducationHistoryProps extends IComponentProps {
 };
 
 export type StartUserInfoProps = {
+   isErrorEmail: string | null,
    eventHandler: (e: React.ChangeEvent<HTMLInputElement>) => void,
    userInfo: User,
 };

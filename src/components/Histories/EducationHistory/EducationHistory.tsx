@@ -23,7 +23,7 @@ const EducationHistory: React.FC<EducationHistoryProps> = ({
       endDate: '',
       description: '',
    });
-
+   
    const [isCollapsed, setIsCollapsed] = useState<boolean | undefined>(true);
 
    useEffect(() => {
@@ -110,4 +110,4 @@ const EducationHistory: React.FC<EducationHistoryProps> = ({
       </>
    );
 };
-export default EducationHistory;
+export default React.memo(EducationHistory);

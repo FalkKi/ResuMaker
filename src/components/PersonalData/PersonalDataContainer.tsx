@@ -5,19 +5,15 @@ import { generateId } from './../../utils/generateId';
 import instance from './../../requests/mainAxios';
 import { useAppDispatch, useAppSelector } from './../../redux/store';
 import { fetchCVs } from './../../requests/cvRequests';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { ActionPayloadType } from "../../redux/cvReducer";
 
 const PersonalDataContainer: React.FC = () => {
    const dispatch = useAppDispatch();
-   const isLoaded = useAppSelector(state => state.setCVs.cvInfo.status);
-   const initCv = useAppSelector(state => state.setCVs.cvInfo.userInfo);
    const [id, setId] = useState(null);
+
 
    useEffect(() => {
       dispatch(fetchCVs()).then((data: any) => {
          if (data.payload && data.payload.length > 0) {
-            console.log(data.payload)
             setId(data.payload[0]._id)
             setUserInfo((prev: User) => ({
                ...prev,
@@ -35,10 +31,10 @@ const PersonalDataContainer: React.FC = () => {
                skills: data.payload[0].userInfo.skills,
                languages: data.payload[0].userInfo.languages,
             }));
+            
          };
       });
    }, []);
-   console.log(id);
 
    const [userInfo, setUserInfo] = useState<User>({
       imageUrl: '',
@@ -62,7 +58,7 @@ const PersonalDataContainer: React.FC = () => {
    const [childrenLanguageHistoryArray, setChildrenLanguageHistoryArray] = useState<LanguageHistoryType[]>([]);
    const [childrenSkillsHistoryArray, setChildrenSkillsHistoryArray] = useState<SkillsHistoryType[]>([]);
 
-   
+
    const getUserInfoData = useCallback((data: UserWorkHistory | LanguageInfoType | UserEducationHistory | UserSkillType,
       param: "educationHistory" | "workHistory" | "languages" | "skills") => {
       const index = userInfo[param].findIndex(el => el.id === data.id);

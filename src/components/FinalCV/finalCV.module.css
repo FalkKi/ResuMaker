@@ -100,6 +100,7 @@ h6 {
 }
 
 .container {
+   border: 1px solid #000;
    font-size: 12px;
    display: flex;
    background-color: #fff;
@@ -107,8 +108,6 @@ h6 {
    margin-top: 10px;
    width: 450px;
    height: 85vh;
-   border-radius: 4px;
-  
 }
 .pdfContainer{
    margin: auto;

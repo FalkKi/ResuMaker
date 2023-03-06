@@ -6,6 +6,7 @@ import styles from './startUserInformation.module.css';
 
 
 const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
+
    return (
       <Box
          sx={{
@@ -33,13 +34,23 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             value={props.userInfo.lastName}
             onChange={props.eventHandler}
             id='lastName' type='text' />
-         <TextField
+
+         {props.isErrorEmail ? <TextField
             required
             label="email"
             value={props.userInfo.email}
             onChange={props.eventHandler}
             id='email' type='text'
-         />
+            helperText='incorrect email'
+            error={true}
+         /> : <TextField
+            required
+            label="email"
+            value={props.userInfo.email}
+            onChange={props.eventHandler}
+            id='email' type='text'
+         />}
+
          <TextField
             required
             label="date of birth"

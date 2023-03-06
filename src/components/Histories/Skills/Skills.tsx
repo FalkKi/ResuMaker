@@ -82,4 +82,4 @@ const Skills: React.FC<SkillsHistoryProps> = ({
       </>
    )
 }
-export default Skills;
+export default React.memo(Skills);

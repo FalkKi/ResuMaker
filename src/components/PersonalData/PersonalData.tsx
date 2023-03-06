@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import styles from './personalData.module.css';
 import { postCV } from '../../requests/cvRequests';
@@ -20,14 +20,20 @@ import { updateCV } from './../../requests/cvRequests';
 import instance from './../../requests/mainAxios';
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
-   console.log(props.id)
    const dispatch = useAppDispatch();
    const inputFileRef = useRef<HTMLInputElement>(null);
    const listRef = useRef<HTMLDivElement | null>(null);
    const navigate = useNavigate();
+   const [isErrorEmail, setError] = useState<string | null>(null);
+
+   function isValidEmail(email: string) {
+      return /\S+@\S+\.\S+/.test(email);
+   };
    
    const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
+      isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
       e.preventDefault()
+      
       if (!props.id) {
          dispatch(postCV(props.userInfo));
          navigate(`/showCv`);
@@ -42,9 +48,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
       };
    };
 
-
    const isButtonDisabled = () => {
-      
       return !(props.userInfo.jobTitle !== '' && props.userInfo.firstName !== ''
          && props.userInfo.lastName !== '' && props.userInfo.email !== '' && props.userInfo.country
          && props.userInfo.city !== '' && props.userInfo.birthDate !== '' && props.userInfo.profSummary !== '');
@@ -86,10 +90,10 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                   />
                   <p>Load foto</p>
                </Button>}
-
                <section className={styles.personalData}>
                   <h3>Personal data</h3>
                   <StartUserInfo
+                     isErrorEmail={isErrorEmail}
                      userInfo={props.userInfo}
                      eventHandler={props.eventHandler}
                   />

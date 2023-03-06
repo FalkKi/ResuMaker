@@ -8,18 +8,6 @@ import "easymde/dist/easymde.min.css";
 
 const ProfSummary: React.FC<ProfSummaryProps> = ({ setUserInfo, userInfo, profSummary }) => {
 
-   // const [value, setValue] = useState("");
-   // const autofocusNoSpellcheckerOptions = useMemo(() => {
-   //    return {
-   //       autofocus: true,
-   //       spellChecker: false,
-   //    } 
-   // }, []);
-
-   // const onChange = useCallback((value: string) => {
-   //    setValue(value);
-   // }, []);
-
    return (
       <Box>
          <h3 className={styles.profSummaryTitle}>Information about you and your professional experience</h3>

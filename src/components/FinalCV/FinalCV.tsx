@@ -10,6 +10,7 @@ import Preloader from '../Preloader/Preloader';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
 import user from '../../pictures/user.svg';
 import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import { LanguageInfoType, UserEducationHistory, UserSkillType, UserWorkHistory } from '../../types/types';
 
 
 const FinalCV = () => {
@@ -79,7 +80,7 @@ const FinalCV = () => {
                            <div className={styles.userAbility}>
                               <h3 className={styles.cvTitle}>Languages</h3>
                               <ul>
-                                 {userCvs.userInfo.languages.map((el) => {
+                                 {userCvs.userInfo.languages.map((el: LanguageInfoType) => {
                                     return (
                                        <li className={styles.personalInfoList} key={el.id}>
                                           <span>{el.languageName}</span> - <span>{el.level}</span>
@@ -91,7 +92,7 @@ const FinalCV = () => {
                            <div className={styles.userAbility}>
                               <h3 className={styles.cvTitle}>Skills</h3>
                               <ul>
-                                 {userCvs.userInfo.skills.map((el) => {
+                                 {userCvs.userInfo.skills.map((el: UserSkillType) => {
                                     return (
                                        <div key={el.id}>
                                           <li className={styles.personalInfoList} key={el.id}>
@@ -119,7 +120,7 @@ const FinalCV = () => {
                         <div className={styles.userHistory}>
                            <h3>Work history</h3>
                            <ul className={styles.userHistoryList}>
-                              {userCvs.userInfo.workHistory.map((el) => {
+                              {userCvs.userInfo.workHistory.map((el: UserWorkHistory) => {
                                  return (
                                     <li key={el.id}>
                                        <div className={styles.userHistoryListFlex}>
@@ -136,7 +137,7 @@ const FinalCV = () => {
                         <div className={styles.userHistory}>
                            <h3>Education history</h3>
                            <ul className={styles.userHistoryList}>
-                              {userCvs.userInfo.educationHistory.map((el) => {
+                              {userCvs.userInfo.educationHistory.map((el: UserEducationHistory) => {
                                  return (
                                     <li key={el.id}>
                                        <div className={styles.userHistoryListFlex}>
