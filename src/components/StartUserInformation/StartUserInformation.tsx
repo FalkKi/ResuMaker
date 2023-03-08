@@ -4,7 +4,6 @@ import { StartUserInfoProps } from "../../types/types";
 import Box from '@mui/material/Box';
 import styles from './startUserInformation.module.css';
 
-
 const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
 
    return (

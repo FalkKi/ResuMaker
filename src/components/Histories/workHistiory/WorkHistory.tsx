@@ -14,6 +14,7 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
    id,
    getUserInfoData,
    deleteWorkHistoryElement,
+   workData
 }) => {
    const [workHistory, setWorkHistory] = useState<UserWorkHistory>({
       id: id,
@@ -67,6 +68,7 @@ const WorkHistory: React.FC<WorkHistoryProps> = ({
                   gridTemplateColumns: "repeat(2, 1fr)",
                   marginBottom: '10px'
                }}>
+                  
                <TextField
                   onChange={wokHistoryInputHandler}
                   label="position"

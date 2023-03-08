@@ -5,11 +5,12 @@ import { generateId } from './../../utils/generateId';
 import instance from './../../requests/mainAxios';
 import { useAppDispatch, useAppSelector } from './../../redux/store';
 import { fetchCVs } from './../../requests/cvRequests';
+import { ActionPayloadType } from "../../redux/cvReducer";
+import { PayloadAction } from '@reduxjs/toolkit';
 
 const PersonalDataContainer: React.FC = () => {
    const dispatch = useAppDispatch();
-   const [id, setId] = useState(null);
-
+   const [id, setId] = useState<string | null>(null);
 
    useEffect(() => {
       dispatch(fetchCVs()).then((data: any) => {
@@ -31,9 +32,9 @@ const PersonalDataContainer: React.FC = () => {
                skills: data.payload[0].userInfo.skills,
                languages: data.payload[0].userInfo.languages,
             }));
-            
          };
       });
+
    }, []);
 
    const [userInfo, setUserInfo] = useState<User>({
@@ -144,6 +145,11 @@ const PersonalDataContainer: React.FC = () => {
          {
             id: generateId(),
             getUserInfoData: getUserInfoData,
+            position: '',
+            company: '',
+            startDate: '',
+            endDate: '',
+            description: '',
          }
       ]));
    }, []);

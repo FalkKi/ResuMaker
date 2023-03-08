@@ -19,6 +19,8 @@ import deleteBtn from '../../pictures/deleteBtn.svg';
 import { updateCV } from './../../requests/cvRequests';
 import instance from './../../requests/mainAxios';
 
+
+
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();
    const inputFileRef = useRef<HTMLInputElement>(null);
@@ -29,11 +31,11 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
    function isValidEmail(email: string) {
       return /\S+@\S+\.\S+/.test(email);
    };
-   
+
    const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
       isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
       e.preventDefault()
-      
+
       if (!props.id) {
          dispatch(postCV(props.userInfo));
          navigate(`/showCv`);
@@ -107,8 +109,10 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                </section>
                <section className={styles.histories}>
                   <div ref={listRef}>
+                    
                      {props.childrenWorkHistoryArray.map((el: WorkHistoryType) => (
                         <WorkHistory
+                           workData={props.userInfo.workHistory}
                            id={el.id}
                            key={el.id}
                            getUserInfoData={props.getUserInfoData}
@@ -163,6 +167,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                <Button disabled={isButtonDisabled()} onClick={createResume} size="large" variant="contained">SAVE CHANGES</Button>
             </div>
          </Box>
+
       </div >
    );
 };

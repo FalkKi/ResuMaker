@@ -14,8 +14,8 @@ export type User = {
    profSummary: string,
    workHistory: Array<UserWorkHistory>,
    educationHistory: Array<UserEducationHistory>,
-   languages: Array<LanguageInfoType>
-   skills: Array<UserSkillType>
+   languages: Array<LanguageInfoType>,
+   skills: Array<UserSkillType>,
 };
 
 export type WorkHistoryType = {
@@ -40,6 +40,7 @@ interface IComponentProps {
 
 export interface WorkHistoryProps extends IComponentProps {
    deleteWorkHistoryElement: (id: string) => void,
+   workData: UserWorkHistory[],
 };
 
 export interface LanguageHistoryProps extends IComponentProps {
@@ -123,6 +124,12 @@ export type UserSkillType = {
    skillName: string,
    skillLevel: string
 };
+
+export type testType = {
+   id: string,
+   name: string,
+   skillLevel: string
+}
 
 export interface Info {
    info: {
