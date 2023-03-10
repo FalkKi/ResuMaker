@@ -9,8 +9,13 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
 import user from '../../pictures/user.svg';
-import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
-import { LanguageInfoType, UserEducationHistory, UserSkillType, UserWorkHistory } from '../../types/types';
+import { PDFExport} from '@progress/kendo-react-pdf';
+import {
+   LanguageInfoType,
+   UserEducationHistory,
+   UserSkillType,
+   UserWorkHistory
+} from '../../types/types';
 
 
 const FinalCV = () => {
@@ -20,15 +25,17 @@ const FinalCV = () => {
       dispatch(fetchCVs());
    }, []);
    const pdfExportComponent = useRef<any>(null);
-   const { id } = useParams();
+   // const { id } = useParams();
+   const id = useAppSelector(state => state.setCVs.cvInfo._id);
    const userCvs = useAppSelector(state => state.setCVs.cvInfo);
    const isLoaded = useAppSelector(state => state.setCVs.cvInfo.status);
    console.log(userCvs);
 
    const createNewCv = () => {
-      dispatch(deleteCV(id));
+      id && dispatch(deleteCV(id));
       navigate('/');
    };
+
    const generatePDF = () => {
       pdfExportComponent.current.save();
    };
@@ -52,7 +59,7 @@ const FinalCV = () => {
                   margin: ' 20px 20px 0 20px',
                   textTransform: 'uppercase',
                   display: 'block'
-               }} variant='contained' size='small'>Create
+               }} variant='contained' size='small'>Create New
                </Button>
             </div>
 
@@ -66,7 +73,8 @@ const FinalCV = () => {
                   <div className={styles.container}>
                      <section className={styles.personalInfo}>
                         {userCvs.userInfo.imageUrl !== '' ?
-                           <img className={styles.userFoto} src={`http://localhost:4434${userCvs.userInfo.imageUrl}`} alt="loadedUser" />
+                           <img className={styles.userFoto}
+                              src={`http://localhost:4434${userCvs.userInfo.imageUrl}`} alt="loadedUser" />
                            : <img className={styles.userFoto} src={user} alt="user" />}
                         <div className={styles.firstInfo}>
                            <p>{userCvs.userInfo.firstName} {userCvs.userInfo.lastName}</p>

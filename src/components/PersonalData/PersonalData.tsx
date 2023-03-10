@@ -18,7 +18,7 @@ import '../../fonts/Roboto/Roboto-Regular.ttf';
 import deleteBtn from '../../pictures/deleteBtn.svg';
 import { updateCV } from './../../requests/cvRequests';
 import instance from './../../requests/mainAxios';
-
+// import { isValidEmail } from '../../utils/generateId';
 
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
@@ -33,8 +33,11 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
    };
 
    const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
+      e.preventDefault();
+
       isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
-      e.preventDefault()
+
+      //here
 
       if (!props.id) {
          dispatch(postCV(props.userInfo));
@@ -109,7 +112,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                </section>
                <section className={styles.histories}>
                   <div ref={listRef}>
-                    
+
                      {props.childrenWorkHistoryArray.map((el: WorkHistoryType) => (
                         <WorkHistory
                            workData={props.userInfo.workHistory}

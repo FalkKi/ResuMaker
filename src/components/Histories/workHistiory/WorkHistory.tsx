@@ -1,6 +1,5 @@
 import TextField from '@mui/material/TextField';
 import React, { useState } from 'react';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { WorkHistoryProps } from '../../../types/types';

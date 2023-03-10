@@ -39,6 +39,7 @@ export const updateCV = createAsyncThunk('makecv/updateCV', async (id: string | 
 });
 
 export const deleteCV = createAsyncThunk('makecv/deleteCV', async (id: string | undefined) => {
+      console.log(id)
       try {
             const { data } = await instance.delete(`/makecv/${id}`);
             return data;
