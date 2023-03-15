@@ -1,37 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import styles from "./login.module.css";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { useForm, Resolver } from "react-hook-form";
-
-type FormValues = {
-   email: string;
-   password: string;
-};
+import { FormValues } from "../../types/types";
+import { useAppDispatch, useAppSelector } from './../../redux/store';
+import { fetchAuth } from "../../requests/cvRequests";
+import { useNavigate } from 'react-router-dom';
 
 const resolver: Resolver<FormValues> = async (values) => {
    return {
-      values: values.email ? values : {},
-      errors: !values.email
-         ? {
-            email: {
-               type: 'required',
-               message: 'email is required.',
-            },
+      values: values.email ? values : values.password ? values : {},
+      errors: !values.email ? {
+         email: {
+            type: 'required',
+            message: 'email is required.',
+         },
+         password: {
+            type: 'required',
+            message: 'password is required.',
+         },
+      }
+         : !values.password ? {
             password: {
                type: 'required',
                message: 'password is required.',
             },
-         }
-         : {},
+         } : {}
    };
 };
 
-export default function Login() {
+const Login = () => {
+   const dispatch = useAppDispatch();
+   const isAuth = useAppSelector(state => state.auth.data);
+   const navigate = useNavigate();
    const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormValues>({ resolver });
-   const onSubmit = handleSubmit((data) => console.log(data));
+
+   const onSubmit = handleSubmit(async (data) => {
+      const loginInfo = await dispatch(fetchAuth(data))
+      console.log(loginInfo)
+      if (!loginInfo.payload) {
+         return alert('Authorization failed');
+      };
+      if ('token' in loginInfo.payload) {
+         window.localStorage.setItem('token', loginInfo.payload.token);
+      };
+      if (loginInfo.payload) {
+         navigate('/');
+      };
+   });
 
    return (
 
@@ -77,10 +96,11 @@ export default function Login() {
                placeholder="password"
             />}
 
-            <Button type="submit" size="large" variant="contained" fullWidth>
-               Войти
+            <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+               Enter
             </Button>
          </form>
       </Paper>
    );
 }
+export default Login;

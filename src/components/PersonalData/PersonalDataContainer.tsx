@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useReducer, useState } from "react"
 import { EducationHistoryType, LanguageHistoryType, LanguageInfoType, SkillsHistoryType, User, UserEducationHistory, UserSkillType, UserWorkHistory, WorkHistoryType } from "../../types/types";
 import PersonalData from "./PersonalData"
-import { generateId } from './../../utils/generateId';
+import { generateId } from '../../utils/helpers';
 import instance from './../../requests/mainAxios';
 import { useAppDispatch, useAppSelector } from './../../redux/store';
 import { fetchCVs } from './../../requests/cvRequests';

@@ -144,3 +144,11 @@ export interface Info {
    deleteElement: (id: string) => void,
 };
 
+export type userRegisterType = {
+   email: string,
+   password: string
+}
+export type FormValues = {
+   email: string
+   password: string
+};

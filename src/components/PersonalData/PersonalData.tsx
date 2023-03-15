@@ -16,9 +16,8 @@ import Box from '@mui/material/Box';
 import { useNavigate, useParams } from 'react-router-dom';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
 import deleteBtn from '../../pictures/deleteBtn.svg';
-import { updateCV } from './../../requests/cvRequests';
 import instance from './../../requests/mainAxios';
-// import { isValidEmail } from '../../utils/generateId';
+import { isValidEmail } from '../../utils/helpers';
 
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
@@ -28,22 +27,16 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const navigate = useNavigate();
    const [isErrorEmail, setError] = useState<string | null>(null);
 
-   function isValidEmail(email: string) {
-      return /\S+@\S+\.\S+/.test(email);
-   };
-
    const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
 
       isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
 
-      //here
-
-      if (!props.id) {
+      if (!props.id && isValidEmail(props.userInfo.email)) {
          dispatch(postCV(props.userInfo));
          navigate(`/showCv`);
       }
-      if (props.id) {
+      if (props.id && isValidEmail(props.userInfo.email)) {
          try {
             await instance.patch(`/makecv/${props.id}`, props.userInfo);
             navigate(`/showCv/${props.id}`);
