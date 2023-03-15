@@ -5,15 +5,18 @@ import { useNavigate } from 'react-router-dom';
 const Home: React.FC = () => {
 
    const navigate = useNavigate();
-   const navigateToCvCreation = () => {
-      navigate("/createCV");
+   const navigateToLogin = () => {
+      navigate("/login");
+   };
+   const navigateToRegister = () => {
+      navigate("/registration");
    };
    
    return (
       <div className={styles.container}>
          <div className={styles.btnContainer}>
-            <button onClick={navigateToCvCreation} className={styles.homeBtn}>Create new CV</button>
-            <button className={styles.homeBtn}>Edit your CV</button>
+            <button onClick={navigateToLogin} className={styles.homeBtn}>Login</button>
+            <button onClick={navigateToRegister} className={styles.homeBtn}>Registration</button>
          </div>
       </div>
    );

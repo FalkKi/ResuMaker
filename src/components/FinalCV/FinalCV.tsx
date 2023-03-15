@@ -9,7 +9,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Preloader from '../Preloader/Preloader';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
 import user from '../../pictures/user.svg';
-import { PDFExport} from '@progress/kendo-react-pdf';
+import { PDFExport } from '@progress/kendo-react-pdf';
 import {
    LanguageInfoType,
    UserEducationHistory,
@@ -24,16 +24,20 @@ const FinalCV = () => {
    useEffect(() => {
       dispatch(fetchCVs());
    }, []);
+
    const pdfExportComponent = useRef<any>(null);
-   // const { id } = useParams();
    const id = useAppSelector(state => state.setCVs.cvInfo._id);
    const userCvs = useAppSelector(state => state.setCVs.cvInfo);
    const isLoaded = useAppSelector(state => state.setCVs.cvInfo.status);
-   console.log(userCvs);
+   console.log('id', id);
 
-   const createNewCv = () => {
-      id && dispatch(deleteCV(id));
-      navigate('/');
+   const createNewCv = async () => {
+      try {
+         await dispatch(deleteCV(id));
+         navigate('/');
+      } catch (err) {
+         console.log(err)
+      };
    };
 
    const generatePDF = () => {

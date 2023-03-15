@@ -45,6 +45,7 @@ const authSlice = createSlice({
          state.data = null;
       },
       [fetchLogin.fulfilled.toString()]: (state, action) => {
+         console.log(action.payload, 'payload')
          state.status = 'loaded';
          state.data = action.payload;
       },

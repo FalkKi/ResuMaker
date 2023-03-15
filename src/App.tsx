@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import Header from './components/Header/Header';
 import FinalCV from './components/FinalCV/FinalCV';
 import PersonalDataContainer from './components/PersonalData/PersonalDataContainer';
@@ -12,19 +12,22 @@ import { useAppSelector, useAppDispatch } from './redux/store';
 
 
 function App() {
-  const isAuth = useAppSelector(state => state.auth.data);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchLogin())
+    dispatch(fetchLogin());
+    if (!window.localStorage.getItem('token')) {
+      navigate('/home')
+    };
   }, []);
-
+  
   return (
     <>
-
       <Header />
       <Routes>
         <Route path="/" element={<PersonalDataContainer />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/showCv" element={<FinalCV />} />

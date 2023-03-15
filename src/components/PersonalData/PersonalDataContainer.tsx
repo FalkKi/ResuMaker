@@ -15,7 +15,7 @@ const PersonalDataContainer: React.FC = () => {
    useEffect(() => {
       dispatch(fetchCVs()).then((data: any) => {
          if (data.payload && data.payload.length > 0) {
-            setId(data.payload[0]._id)
+            setId(data.payload[0]._id);
             setUserInfo((prev: User) => ({
                ...prev,
                imageUrl: data.payload[0].userInfo.imageUrl,

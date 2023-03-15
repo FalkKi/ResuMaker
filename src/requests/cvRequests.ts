@@ -26,17 +26,17 @@ export const postCV = createAsyncThunk('makecv/postCV', async (info: User) => {
       }
 });
 
-// export const updateCV = createAsyncThunk('makecv/updateCV', async (id: string | undefined, info: any) => {
-//       console.log(info, id)
-//       try {
-//             const { data } = await instance.patch(`/makecv/${id}`, info);
-//             console.log(data)
-//             return data;
-//       } catch (err) {
-//             console.log(err)
-//             alert('Please check your intenet connection')
-//       }
-// });
+export const updateCV = createAsyncThunk('makecv/updateCV', async (id: string | undefined, info: any) => {
+      console.log(info, id)
+      try {
+            const { data } = await instance.patch(`/makecv/${id}`, info);
+            console.log(data)
+            return data;
+      } catch (err) {
+            console.log(err)
+            alert('Please check your intenet connection')
+      }
+});
 
 export const deleteCV = createAsyncThunk('makecv/deleteCV', async (id: string | undefined) => {
       console.log(id)
@@ -57,12 +57,10 @@ export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (param
 
 export const fetchAuth = createAsyncThunk('auth/fetchUserData', async (params: userRegisterType) => {
       const { data } = await instance.post('/auth/login', params);
-      console.log('authdata', data)  
       return data;
 });
 
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', async () => {
       const { data } = await instance.get('/auth/me');
-      console.log(data)
       return data;
    });
