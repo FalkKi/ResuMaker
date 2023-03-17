@@ -29,7 +29,7 @@ export const postCV = createAsyncThunk('makecv/postCV', async (info: User) => {
 export const updateCV = createAsyncThunk('makecv/updateCV', async (id: string | undefined, info: any) => {
       console.log(info, id)
       try {
-            const { data } = await instance.patch(`/makecv/${id}`, info);
+            const { data } = await instance.patch<User>(`/makecv/${id}`, info);
             console.log(data)
             return data;
       } catch (err) {
@@ -41,7 +41,7 @@ export const updateCV = createAsyncThunk('makecv/updateCV', async (id: string | 
 export const deleteCV = createAsyncThunk('makecv/deleteCV', async (id: string | undefined) => {
       console.log(id)
       try {
-            const { data } = await instance.delete(`/makecv/${id}`);
+            const { data } = await instance.delete<User>(`/makecv/${id}`);
             return data;
       } catch (err) {
             console.log(err)

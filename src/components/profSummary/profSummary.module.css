@@ -6,6 +6,7 @@
    outline: none;
    resize: none;
    overflow: auto;
+   padding: 10px;
 }
 
 .textarea:focus {

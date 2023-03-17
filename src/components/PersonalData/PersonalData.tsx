@@ -69,12 +69,12 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
             component="form"
             sx={{
                '& .MuiTextField-root': {
-                  margin: '15px 15px 0 15px'
+                  margin: '15px 15px 0 15px',
                },
                maxWidth: "900px",
                margin: "auto",
                textTransform: 'uppercase',
-               fontFamily: 'Tahoma'
+               fontFamily: 'Tahoma',
             }}
          >
             <div>

@@ -75,7 +75,6 @@ const FinalCV = () => {
                   margin={{ top: 30, left: 50, right: 50, bottom: 50 }}
                   ref={pdfExportComponent}
                   paperSize="A4"
-
                >
                   <div className={styles.container}>
                      <section className={styles.personalInfo}>
