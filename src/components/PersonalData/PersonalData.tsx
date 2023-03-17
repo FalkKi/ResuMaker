@@ -19,6 +19,13 @@ import deleteBtn from '../../pictures/deleteBtn.svg';
 import instance from './../../requests/mainAxios';
 import { isValidEmail } from '../../utils/helpers';
 
+const buttonStyle = {
+   mb: '15px',
+   ":hover": {
+      backgroundColor: '#3fb0ac',
+      color: '#fff'
+   }
+}
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const dispatch = useAppDispatch();
@@ -62,13 +69,12 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
             component="form"
             sx={{
                '& .MuiTextField-root': {
-                  mt: '15px',
-                  mr: "20px"
+                  margin: '15px 15px 0 15px'
                },
                maxWidth: "900px",
                margin: "auto",
-               fontFamily: "Roboto",
-               textTransform: 'uppercase'
+               textTransform: 'uppercase',
+               fontFamily: 'Tahoma'
             }}
          >
             <div>
@@ -84,7 +90,8 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                         <img className={styles.deleteBtnImg} src={deleteBtn} alt="" />
                      </Button>
                   </div>
-               ) : <Button variant='contained' className={styles.imageButton} onClick={() => { inputFileRef.current !== null ? inputFileRef.current.click() : null }} size="medium">
+               ) : <Button variant='contained' className={styles.imageButton}
+                  onClick={() => { inputFileRef.current !== null ? inputFileRef.current.click() : null }} size="medium">
                   <Avatar
                      alt="userAvatar"
                      src=""
@@ -120,7 +127,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                         />
                      ))}
                   </div>
-                  <Button sx={{ mb: '15px' }} fullWidth onClick={props.addMoreWorkData} variant='outlined'>
+                  <Button sx={buttonStyle} fullWidth onClick={props.addMoreWorkData} variant='outlined'>
                      {props.childrenWorkHistoryArray.length > 0 ? 'Add More Work history' : 'Add Work history'}
                   </Button>
                   <>
@@ -134,8 +141,8 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                      ))}
                   </>
 
-                  <Button sx={{ mb: '15px' }} fullWidth onClick={props.addEducationChildren} variant='outlined'>
-                     {props.childrenEducationHistoryArray.length > 0 ? 'Add More' : 'Add Education history'}
+                  <Button sx={buttonStyle} fullWidth onClick={props.addEducationChildren} variant='outlined'>
+                     {props.childrenEducationHistoryArray.length > 0 ? 'Add more studies' : 'Add Education history'}
                   </Button>
                   <>
                      {props.childrenLanguageHistoryArray.map((el: LanguageHistoryType) => (
@@ -147,7 +154,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                         />
                      ))}
                   </>
-                  <Button sx={{ mb: '15px' }} fullWidth onClick={props.addLanguageChildren} variant='outlined'>
+                  <Button sx={buttonStyle} fullWidth onClick={props.addLanguageChildren} variant='outlined'>
                      {props.childrenLanguageHistoryArray.length > 0 ? 'Add more languages' : 'Add language'}
                   </Button>
                   <>
@@ -160,7 +167,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                         />
                      ))}
                   </>
-                  <Button sx={{ mb: '15px' }} fullWidth onClick={props.addSkillsChildren} variant='outlined'>
+                  <Button sx={buttonStyle} fullWidth onClick={props.addSkillsChildren} variant='outlined'>
                      {props.childrenSkillsHistoryArray.length > 0 ? 'Add more Skills' : 'Add Skill'}
                   </Button>
                </section>

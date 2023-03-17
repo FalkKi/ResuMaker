@@ -7,10 +7,18 @@
    resize: none;
    overflow: auto;
 }
-.textarea:focus{
-   border: 2px solid rgb(130, 157, 238);
+
+.textarea:focus {
+   border: 2px solid #3fb0ac;
 }
 
 .profSummaryTitle {
    margin-bottom: 10px;
+   line-height: 15px;
+}
+
+@media(max-width: 480px) {
+   .profSummaryTitle {
+      text-align: center;
+   }
 }

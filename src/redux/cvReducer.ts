@@ -55,7 +55,7 @@ const setCVs = createSlice({
       [fetchCVs.pending.toString()]: (state: initialStateType) => {
          state.cvInfo.status = 'loading';
       },
-      [fetchCVs.fulfilled.toString()]: (state, action: PayloadAction<ActionPayloadType[]>) => {
+      [fetchCVs.fulfilled.toString()]: (state: initialStateType, action: PayloadAction<ActionPayloadType[]>) => {
          console.log(action)
          if (action.payload && action.payload.length > 0) {
             state.cvInfo = action.payload[action.payload.length - 1]; 

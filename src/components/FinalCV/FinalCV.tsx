@@ -29,7 +29,7 @@ const FinalCV = () => {
    const id = useAppSelector(state => state.setCVs.cvInfo._id);
    const userCvs = useAppSelector(state => state.setCVs.cvInfo);
    const isLoaded = useAppSelector(state => state.setCVs.cvInfo.status);
-   console.log('id', id);
+
 
    const createNewCv = async () => {
       try {
@@ -50,7 +50,9 @@ const FinalCV = () => {
             display: 'flex',
             bgcolor: "#323232",
             height: '90vh',
-            fontFamily: "Roboto",
+            fontFamily: 'Roboto',
+            fontWeight: '12px',
+            lineHeight: '12px',
          }}>
             <div>
                <Button onClick={() => navigate(-1)} sx={{
@@ -65,6 +67,7 @@ const FinalCV = () => {
                   display: 'block'
                }} variant='contained' size='small'>Create New
                </Button>
+               <Button onClick={generatePDF} sx={{ margin: ' 20px 20px 0 20px' }} variant='outlined' size='large'>Save PDF</Button>
             </div>
 
             <div className={styles.pdfContainer}>
@@ -157,8 +160,8 @@ const FinalCV = () => {
                                           <p style={{ color: '#01257D' }}>{el.startDate} - {el.endDate}</p>
                                        </div>
                                        <p>{el.studies}</p>
-                                       <p>{el.description}</p>
                                        <p>{el.location}</p>
+                                       <p>{el.description}</p>
                                     </li>
                                  )
                               })}
@@ -167,9 +170,6 @@ const FinalCV = () => {
                      </section>
                   </div>
                </PDFExport>
-            </div>
-            <div>
-               <Button onClick={generatePDF} sx={{ margin: ' 20px 20px 0 0px' }} variant='outlined' size='large'>Save PDF</Button>
             </div>
          </Box> : <Preloader />}
       </>

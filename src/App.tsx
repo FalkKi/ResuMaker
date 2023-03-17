@@ -8,8 +8,8 @@ import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import { useEffect } from 'react';
 import { fetchLogin } from './requests/cvRequests';
-import { useAppSelector, useAppDispatch } from './redux/store';
-
+import { useAppDispatch } from './redux/store';
+import WebFont from 'webfontloader';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,11 +20,16 @@ function App() {
     if (!window.localStorage.getItem('token')) {
       navigate('/home')
     };
+    WebFont.load({
+      google: {
+        families: ['Tahoma', 'Roboto']
+      }
+    });
   }, []);
-  
+
   return (
     <>
-      <Header />
+      <Header/>
       <Routes>
         <Route path="/" element={<PersonalDataContainer />} />
         <Route path="/home" element={<Home />} />

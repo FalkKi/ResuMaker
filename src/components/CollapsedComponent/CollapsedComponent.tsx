@@ -4,6 +4,16 @@ import styles from './collapsedComponent.module.css'
 import Collapse from '@mui/material/Collapse';
 import { Info } from '../../types/types';
 import Box from '@mui/material/Box';
+import { height } from "@mui/system";
+
+const collapsedStyle = {
+   display: 'flex',
+   backgroundColor: '#1599C7',
+   borderRadius: '4px',
+   padding: '5px',
+   height: '50px',
+   juctifyContent: 'space-between',
+}
 
 const CollapsedComponent: React.FC<Info> = (props) => {
    return (
@@ -17,16 +27,9 @@ const CollapsedComponent: React.FC<Info> = (props) => {
          {props.info.userEducationHistory ?
             <Collapse
                in={!props.isCollapsed}>
-               <Box sx={{
-                  display: 'flex',
-                  backgroundColor: '#1599C7',
-                  borderRadius: '4px',
-                  padding: '9px',
-                  height: '80px',
-                  juctifyContent: 'space-between'
-               }}>
+               <Box sx={collapsedStyle}>
                   <div>
-                     <h3>{props.info.userEducationHistory.institution ?
+                     <h3 className={styles.collapseTitle}>{props.info.userEducationHistory.institution ?
                         props.info.userEducationHistory.institution : "Institution"}</h3>
                      <p>
                         {props.info.userEducationHistory.startDate ? props.info.userEducationHistory.startDate : " Start date "} -
@@ -41,17 +44,11 @@ const CollapsedComponent: React.FC<Info> = (props) => {
             </Collapse> : ''}
          {props.info.userWorkHistory ?
             <Collapse in={!props.isCollapsed}>
-               <Box sx={{
-                  display: 'flex',
-                  backgroundColor: '#1599C7',
-                  borderRadius: '4px',
-                  padding: '5px',
-                  height: '80px',
-                  juctifyContent: 'space-between'
-               }}>
+               <Box sx={collapsedStyle}>
                   <div>
-                     <h3>{props.info.userWorkHistory.position ?
-                        props.info.userWorkHistory.position : "Position"}</h3>
+                     <h3 className={styles.collapseTitle}>{props.info.userWorkHistory.position ?
+                        props.info.userWorkHistory.position : "Position"}
+                     </h3>
                      <p>
                         {props.info.userWorkHistory.startDate ? props.info.userWorkHistory.startDate : " Start date"} -
                         {props.info.userWorkHistory.endDate ? props.info.userWorkHistory.endDate : " End date"}
@@ -66,14 +63,7 @@ const CollapsedComponent: React.FC<Info> = (props) => {
 
          {props.info.languageInfoType ?
             <Collapse in={!props.isCollapsed}>
-               <Box sx={{
-                  display: 'flex',
-                  backgroundColor: '#1599C7',
-                  borderRadius: '4px',
-                  padding: '5px',
-                  height: '80px',
-                  juctifyContent: 'space-between'
-               }}>
+               <Box sx={collapsedStyle}>
                   <div>
                      <span>{props.info.languageInfoType.languageName ?
                         props.info.languageInfoType.languageName : "Language"}
@@ -89,14 +79,7 @@ const CollapsedComponent: React.FC<Info> = (props) => {
                </Box>
             </Collapse> : ''}
          {props.info.userSkillType ? <Collapse in={!props.isCollapsed}>
-            <Box sx={{
-               display: 'flex',
-               backgroundColor: '#1599C7',
-               borderRadius: '4px',
-               padding: '5px',
-               height: '80px',
-               juctifyContent: 'space-between'
-            }}>
+            <Box sx={collapsedStyle}>
                <div>
                   <span>{props.info.userSkillType.skillName ?
                      props.info.userSkillType.skillName : "Skill"}

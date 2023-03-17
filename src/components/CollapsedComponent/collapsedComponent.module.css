@@ -2,3 +2,6 @@
    display: flex;
    border-bottom: 2px solid rgb(0, 195, 255);
 }
+.collapseTitle{
+   margin-bottom: 5px;
+}

@@ -12,12 +12,14 @@ const ProfSummary: React.FC<ProfSummaryProps> = ({ setUserInfo, userInfo, profSu
       <Box>
          <h3 className={styles.profSummaryTitle}>Information about you and your professional experience</h3>
          <textarea
+            maxLength={800}
             className={styles.textarea}
             value={profSummary}
             onChange={(e) => setUserInfo({ ...userInfo, profSummary: e.target.value })}
          />
-         {/* <SimpleMdeReact value={value} onChange={onChange} /> */}
-      </Box>
+
+         
+      </Box >
    );
 };
 
