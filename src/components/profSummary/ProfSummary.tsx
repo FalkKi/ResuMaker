@@ -17,8 +17,6 @@ const ProfSummary: React.FC<ProfSummaryProps> = ({ setUserInfo, userInfo, profSu
             value={profSummary}
             onChange={(e) => setUserInfo({ ...userInfo, profSummary: e.target.value })}
          />
-
-         
       </Box >
    );
 };

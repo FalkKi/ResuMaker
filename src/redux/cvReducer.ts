@@ -51,14 +51,13 @@ const setCVs = createSlice({
    initialState,
    reducers: {
    },
-   extraReducers: {
-      [fetchCVs.pending.toString()]: (state: initialStateType) => {
+   extraReducers: (builder) => {
+      builder.addCase(fetchCVs.pending.toString(), (state: initialStateType) => {
          state.cvInfo.status = 'loading';
-      },
-      [fetchCVs.fulfilled.toString()]: (state: initialStateType, action: PayloadAction<ActionPayloadType[]>) => {
-         console.log(action)
+      });
+      builder.addCase(fetchCVs.fulfilled.toString(), (state: initialStateType, action: PayloadAction<ActionPayloadType[]>) => {
          if (action.payload && action.payload.length > 0) {
-            state.cvInfo = action.payload[action.payload.length - 1]; 
+            state.cvInfo = action.payload[action.payload.length - 1];
             state.cvInfo.status = 'loaded';
          }
          if (!action.payload || action.payload.length === 0) {
@@ -84,12 +83,12 @@ const setCVs = createSlice({
                updatedAt: '',
             }
             state.cvInfo.status = 'loading';
-         }
-      }
-   },
-   [fetchCVs.rejected.toString()]: (state: initialStateType) => {
-      state.cvInfo.status = 'error';
-   },
+         };
+      });
+      builder.addCase(fetchCVs.rejected.toString(), (state: initialStateType) => {
+         state.cvInfo.status = 'error';
+      });
+   }
 });
 
 export const cvReducer = setCVs.reducer; 

@@ -25,49 +25,49 @@ const authSlice = createSlice({
    initialState,
    reducers: {
       logout: (state) => {
-         state.data = null; 
+         state.data = null;
       }
    },
-   extraReducers: {
-      [fetchRegister.pending.toString()]: (state) => {
+   extraReducers: (builder) => {
+      builder.addCase(fetchRegister.pending.toString(), (state) => {
          state.status = 'loading';
          state.data = null;
-      },
-      [fetchRegister.fulfilled.toString()]: (state, action: PayloadAction<LoginActionPayloadType>) => {
+      });
+      builder.addCase(fetchRegister.fulfilled.toString(), (state, action: PayloadAction<LoginActionPayloadType>) => {
          console.log(action.payload, 'register')
          state.status = 'loaded';
          state.data = action.payload;
-      },
-      [fetchRegister.rejected.toString()]: (state, action) => {
+      });
+      builder.addCase(fetchRegister.rejected.toString(), (state, action) => {
          state.status = 'error';
          state.data = null;
-      },
-      [fetchAuth.pending.toString()]: (state) => {
+      });
+      builder.addCase(fetchAuth.pending.toString(), (state) => {
          state.status = 'loading';
          state.data = null;
-      },
-      [fetchAuth.fulfilled.toString()]: (state, action: PayloadAction<LoginActionPayloadType>) => {
+      });
+      builder.addCase(fetchAuth.fulfilled.toString(), (state, action: PayloadAction<LoginActionPayloadType>) => {
          console.log(action.payload, 'auth');
          state.status = 'loaded';
          state.data = action.payload;
-      },
-      [fetchAuth.rejected.toString()]: (state, action) => {
+      });
+      builder.addCase(fetchAuth.rejected.toString(), (state) => {
          state.status = 'error';
          state.data = null;
-      },
-      [fetchLogin.pending.toString()]: (state) => {
+      });
+      builder.addCase(fetchLogin.pending.toString(), (state) => {
          state.status = 'loading';
          state.data = null;
-      },
-      [fetchLogin.fulfilled.toString()]: (state, action: PayloadAction<LoginActionPayloadType>) => {
+      });
+      builder.addCase(fetchLogin.fulfilled.toString(), (state, action: PayloadAction<LoginActionPayloadType>) => {
          console.log(action.payload, 'login')
          state.status = 'loaded';
          state.data = action.payload;
-      },
-      [fetchLogin.rejected.toString()]: (state, action) => {
+      });
+      builder.addCase(fetchLogin.rejected.toString(), (state, action) => {
          state.status = 'error';
          state.data = null;
-      },
+      });
    }
 });
 
