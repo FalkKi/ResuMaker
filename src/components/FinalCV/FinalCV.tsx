@@ -78,23 +78,23 @@ const FinalCV = () => {
                >
                   <div className={styles.container}>
                      <section className={styles.personalInfo}>
-                        {userCvs.userInfo.imageUrl !== '' ?
+                        {userCvs.imageUrl !== '' ?
                            <img className={styles.userFoto}
-                              src={`http://localhost:4434${userCvs.userInfo.imageUrl}`} alt="loadedUser" />
+                              src={`http://localhost:4434${userCvs.imageUrl}`} alt="loadedUser" />
                            : <img className={styles.userFoto} src={user} alt="user" />}
                         <div className={styles.firstInfo}>
-                           <p>{userCvs.userInfo.firstName} {userCvs.userInfo.lastName}</p>
-                           <p>{userCvs.userInfo.jobTitle}</p>
-                           <p>{userCvs.userInfo.email}</p>
-                           <p>{userCvs.userInfo.birthDate}</p>
-                           <p>{userCvs.userInfo.country}</p>
-                           <p>{userCvs.userInfo.city}</p>
+                           <p>{userCvs.firstName} {userCvs.lastName}</p>
+                           <p>{userCvs.jobTitle}</p>
+                           <p>{userCvs.email}</p>
+                           <p>{userCvs.birthDate}</p>
+                           <p>{userCvs.country}</p>
+                           <p>{userCvs.city}</p>
                         </div>
                         <div className={styles.userAbilities}>
                            <div className={styles.userAbility}>
                               <h3 className={styles.cvTitle}>Languages</h3>
                               <ul>
-                                 {userCvs.userInfo.languages.map((el: LanguageInfoType) => {
+                                 {userCvs.languages.map((el: LanguageInfoType) => {
                                     return (
                                        <li className={styles.personalInfoList} key={el.id}>
                                           <span>{el.languageName}</span> - <span>{el.level}</span>
@@ -106,7 +106,7 @@ const FinalCV = () => {
                            <div className={styles.userAbility}>
                               <h3 className={styles.cvTitle}>Skills</h3>
                               <ul>
-                                 {userCvs.userInfo.skills.map((el: UserSkillType) => {
+                                 {userCvs.skills.map((el: UserSkillType) => {
                                     return (
                                        <div key={el.id}>
                                           <li className={styles.personalInfoList} key={el.id}>
@@ -129,12 +129,12 @@ const FinalCV = () => {
                      <section className={styles.personalDetails}>
                         <div className={styles.userHistory}>
                            <h3>Profile</h3>
-                           {userCvs.userInfo.profSummary}
+                           {userCvs.profSummary}
                         </div>
                         <div className={styles.userHistory}>
                            <h3>Work history</h3>
                            <ul className={styles.userHistoryList}>
-                              {userCvs.userInfo.workHistory.map((el: UserWorkHistory) => {
+                              {userCvs.workHistory.map((el: UserWorkHistory) => {
                                  return (
                                     <li key={el.id}>
                                        <div className={styles.userHistoryListFlex}>
@@ -151,7 +151,7 @@ const FinalCV = () => {
                         <div className={styles.userHistory}>
                            <h3>Education history</h3>
                            <ul className={styles.userHistoryList}>
-                              {userCvs.userInfo.educationHistory.map((el: UserEducationHistory) => {
+                              {userCvs.educationHistory.map((el: UserEducationHistory) => {
                                  return (
                                     <li key={el.id}>
                                        <div className={styles.userHistoryListFlex}>

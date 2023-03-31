@@ -3,10 +3,8 @@ import { EducationHistoryType, LanguageHistoryType, LanguageInfoType, SkillsHist
 import PersonalData from "./PersonalData"
 import { generateId } from '../../utils/helpers';
 import instance from './../../requests/mainAxios';
-import { useAppDispatch, useAppSelector } from './../../redux/store';
+import { useAppDispatch} from './../../redux/store';
 import { fetchCVs } from './../../requests/cvRequests';
-import { ActionPayloadType } from "../../redux/cvReducer";
-import { PayloadAction } from '@reduxjs/toolkit';
 
 const PersonalDataContainer: React.FC = () => {
    const dispatch = useAppDispatch();
@@ -18,19 +16,19 @@ const PersonalDataContainer: React.FC = () => {
             setId(data.payload[0]._id);
             setUserInfo((prev: User) => ({
                ...prev,
-               imageUrl: data.payload[0].userInfo.imageUrl,
-               jobTitle: data.payload[0].userInfo.jobTitle,
-               firstName: data.payload[0].userInfo.firstName,
-               lastName: data.payload[0].userInfo.lastName,
-               profSummary: data.payload[0].userInfo.profSummary,
-               city: data.payload[0].userInfo.city,
-               country: data.payload[0].userInfo.country,
-               birthDate: data.payload[0].userInfo.birthDate,
-               email: data.payload[0].userInfo.email,
-               workHistory: data.payload[0].userInfo.workHistory,
-               educationHistory: data.payload[0].userInfo.educationHistory,
-               skills: data.payload[0].userInfo.skills,
-               languages: data.payload[0].userInfo.languages,
+               imageUrl: data.payload[0].imageUrl,
+               jobTitle: data.payload[0].jobTitle,
+               firstName: data.payload[0].firstName,
+               lastName: data.payload[0].lastName,
+               profSummary: data.payload[0].profSummary,
+               city: data.payload[0].city,
+               country: data.payload[0].country,
+               birthDate: data.payload[0].birthDate,
+               email: data.payload[0].email,
+               workHistory: data.payload[0].workHistory,
+               educationHistory: data.payload[0].educationHistory,
+               skills: data.payload[0].skills,
+               languages: data.payload[0].languages,
             }));
          };
       });
