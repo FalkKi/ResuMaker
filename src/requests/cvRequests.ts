@@ -26,16 +26,16 @@ export const postCV = createAsyncThunk('makecv/postCV', async (info: User) => {
       }
 });
 
-export const updateCV = createAsyncThunk('makecv/updateCV', async (id: string | undefined, info: any) => {
-      console.log(info, id)
+export const updateCV = createAsyncThunk('makecv/updateCV', async (info: { id: string, data: unknown }) => {
+      console.log(info)
       try {
-            const { data } = await instance.patch<User>(`/makecv/${id}`, info);
+            const { data } = await instance.patch<User>(`/makecv/${info.id}`, info.data);
             console.log(data)
             return data;
       } catch (err) {
             console.log(err)
             alert('Please check your intenet connection')
-      }
+      };
 });
 
 export const deleteCV = createAsyncThunk('makecv/deleteCV', async (id: string | undefined) => {
@@ -63,4 +63,4 @@ export const fetchAuth = createAsyncThunk('auth/fetchUserData', async (params: u
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', async () => {
       const { data } = await instance.get('/auth/me');
       return data;
-   });
+});

@@ -32,7 +32,6 @@ const PersonalDataContainer: React.FC = () => {
             }));
          };
       });
-
    }, []);
 
    const [userInfo, setUserInfo] = useState<User>({
@@ -49,6 +48,7 @@ const PersonalDataContainer: React.FC = () => {
       educationHistory: [],
       languages: [],
       skills: [],
+      userId: '',
    });
 
    console.log(userInfo)

@@ -40,6 +40,10 @@ const FinalCV = () => {
       };
    };
 
+   const updateUserCv = () => {
+      navigate(`/${id}`);
+   }
+
    const generatePDF = () => {
       pdfExportComponent.current.save();
    };
@@ -55,7 +59,7 @@ const FinalCV = () => {
             lineHeight: '12px',
          }}>
             <div>
-               <Button onClick={() => navigate(-1)} sx={{
+               <Button onClick={updateUserCv} sx={{
                   margin: ' 20px 20px 0 20px',
                   textTransform: 'uppercase',
                   display: 'block'

@@ -18,6 +18,7 @@ import '../../fonts/Roboto/Roboto-Regular.ttf';
 import deleteBtn from '../../pictures/deleteBtn.svg';
 import instance from './../../requests/mainAxios';
 import { isValidEmail } from '../../utils/helpers';
+import { updateCV } from './../../requests/cvRequests';
 
 const buttonStyle = {
    mb: '15px',
@@ -49,7 +50,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
       }
       if (props.id && isValidEmail(props.userInfo.email)) {
          try {
-            await instance.patch(`/makecv/${props.id}`, props.userInfo);
+            await dispatch(updateCV({id: props.id, data: props.userInfo}))
             navigate(`/showCv/${props.id}`);
          } catch (err) {
             console.log(err);

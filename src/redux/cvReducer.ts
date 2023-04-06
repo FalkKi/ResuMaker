@@ -50,6 +50,7 @@ const initialState: initialStateType = {
 export type ActionPayloadType = {
    status: string,
    _id: string,
+   userId: string,
    _v: number,
    imageUrl: string,
    birthDate: string,

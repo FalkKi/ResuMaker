@@ -1,7 +1,4 @@
 
-import SimpleMDE from 'react-simplemde-editor';
-import { initialStateType } from '../redux/cvReducer';
-
 export type User = {
    imageUrl: string,
    jobTitle: string,
@@ -16,6 +13,7 @@ export type User = {
    educationHistory: Array<UserEducationHistory>,
    languages: Array<LanguageInfoType>,
    skills: Array<UserSkillType>,
+   userId: string,
 };
 
 export type WorkHistoryType = {

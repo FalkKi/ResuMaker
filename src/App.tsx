@@ -32,6 +32,7 @@ function App() {
       <Header/>
       <Routes>
         <Route path="/" element={<PersonalDataContainer />} />
+        <Route path="/:id" element={<PersonalDataContainer />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
