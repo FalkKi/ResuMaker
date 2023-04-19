@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch, useAppSelector } from './../../redux/store';
-import { deleteCV, fetchCVs } from './../../requests/cvRequests';
+import { deleteCV, fetchCVs, fetchLastCvCurrentUser } from './../../requests/cvRequests';
 import { useEffect, useRef } from 'react';
 import styles from './finalCV.module.css';
 import Button from '@mui/material/Button';
@@ -21,9 +21,16 @@ import {
 const FinalCV = () => {
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
+
+   const userId = useAppSelector((state)=>{
+      if(state.auth.data){
+         return state.auth.data._id
+      };
+   })
+
    useEffect(() => {
-      dispatch(fetchCVs());
-   }, []);
+      dispatch(fetchLastCvCurrentUser(userId));
+   }, [userId]);
 
    const pdfExportComponent = useRef<any>(null);
    const id = useAppSelector(state => state.setCVs.cvInfo._id);
@@ -42,7 +49,7 @@ const FinalCV = () => {
 
    const updateUserCv = () => {
       navigate(`/${id}`);
-   }
+   };
 
    const generatePDF = () => {
       pdfExportComponent.current.save();
@@ -82,7 +89,7 @@ const FinalCV = () => {
                >
                   <div className={styles.container}>
                      <section className={styles.personalInfo}>
-                        {userCvs.imageUrl !== '' ?
+                        {userCvs.imageUrl ?
                            <img className={styles.userFoto}
                               src={`http://localhost:4434${userCvs.imageUrl}`} alt="loadedUser" />
                            : <img className={styles.userFoto} src={user} alt="user" />}
@@ -98,7 +105,7 @@ const FinalCV = () => {
                            <div className={styles.userAbility}>
                               <h3 className={styles.cvTitle}>Languages</h3>
                               <ul>
-                                 {userCvs.languages.map((el: LanguageInfoType) => {
+                                 {userCvs.languages && userCvs.languages.map((el: LanguageInfoType) => {
                                     return (
                                        <li className={styles.personalInfoList} key={el.id}>
                                           <span>{el.languageName}</span> - <span>{el.level}</span>
@@ -110,7 +117,7 @@ const FinalCV = () => {
                            <div className={styles.userAbility}>
                               <h3 className={styles.cvTitle}>Skills</h3>
                               <ul>
-                                 {userCvs.skills.map((el: UserSkillType) => {
+                                 {userCvs.skills && userCvs.skills.map((el: UserSkillType) => {
                                     return (
                                        <div key={el.id}>
                                           <li className={styles.personalInfoList} key={el.id}>
@@ -138,7 +145,7 @@ const FinalCV = () => {
                         <div className={styles.userHistory}>
                            <h3>Work history</h3>
                            <ul className={styles.userHistoryList}>
-                              {userCvs.workHistory.map((el: UserWorkHistory) => {
+                              {userCvs.workHistory && userCvs.workHistory.map((el: UserWorkHistory) => {
                                  return (
                                     <li key={el.id}>
                                        <div className={styles.userHistoryListFlex}>
@@ -155,7 +162,7 @@ const FinalCV = () => {
                         <div className={styles.userHistory}>
                            <h3>Education history</h3>
                            <ul className={styles.userHistoryList}>
-                              {userCvs.educationHistory.map((el: UserEducationHistory) => {
+                              {userCvs.educationHistory && userCvs.educationHistory.map((el: UserEducationHistory) => {
                                  return (
                                     <li key={el.id}>
                                        <div className={styles.userHistoryListFlex}>

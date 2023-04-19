@@ -6,8 +6,36 @@ import { ActionPayloadType } from "../redux/cvReducer";
 
 export const fetchCVs = createAsyncThunk('makecv/fetchCVs', async () => {
       try {
-            const { data } = await instance.get<ActionPayloadType[]>('/makecv');
+            const { data } = await instance.get<ActionPayloadType>('/makecv');
             console.log(data)
+            return data;
+      } catch (err) {
+            console.log(err)
+            alert('Please check your intenet connection')
+      };
+});
+
+export const fetchLastCvCurrentUser = createAsyncThunk('makecv/fetchCVs', async (id: string | undefined) => {
+      console.log(id)
+      try {
+            const { data } = await instance.get<ActionPayloadType>(`/getUserLastCv/${id}`);
+            if (!data) {
+                  return {
+                        imageUrl: '',
+                        jobTitle: '',
+                        firstName: '',
+                        lastName: '',
+                        profSummary: '',
+                        city: '',
+                        country: '',
+                        birthDate: '',
+                        email: '',
+                        workHistory: [],
+                        educationHistory: [],
+                        skills: [],
+                        languages: [],
+                  }
+            }
             return data;
       } catch (err) {
             console.log(err)
@@ -63,4 +91,15 @@ export const fetchAuth = createAsyncThunk('auth/fetchUserData', async (params: u
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', async () => {
       const { data } = await instance.get('/auth/me');
       return data;
+});
+
+export const fetchCurrentCV = createAsyncThunk('makecv/getCurrentCv', async (id: string | undefined) => {
+      try {
+            const { data } = await instance.get<User>(`/makecv/${id}`);
+            console.log(data)
+            return data;
+      } catch (err) {
+            console.log(err)
+            alert('Please check your intenet connection')
+      };
 });

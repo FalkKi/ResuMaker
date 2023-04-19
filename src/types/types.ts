@@ -123,12 +123,6 @@ export type UserSkillType = {
    skillLevel: string
 };
 
-export type testType = {
-   id: string,
-   name: string,
-   skillLevel: string
-}
-
 export interface Info {
    info: {
       userWorkHistory?: UserWorkHistory

@@ -3,36 +3,45 @@ import { EducationHistoryType, LanguageHistoryType, LanguageInfoType, SkillsHist
 import PersonalData from "./PersonalData"
 import { generateId } from '../../utils/helpers';
 import instance from './../../requests/mainAxios';
-import { useAppDispatch} from './../../redux/store';
-import { fetchCVs } from './../../requests/cvRequests';
+import { useAppDispatch, useAppSelector } from './../../redux/store';
+import { fetchCVs, fetchLastCvCurrentUser } from './../../requests/cvRequests';
 
 const PersonalDataContainer: React.FC = () => {
    const dispatch = useAppDispatch();
    const [id, setId] = useState<string | null>(null);
-
+   const userId = useAppSelector((state) => {
+      if(state.auth.data){
+         return state.auth.data._id
+      };
+   });
+   console.log('userId', userId)
+ 
    useEffect(() => {
-      dispatch(fetchCVs()).then((data: any) => {
-         if (data.payload && data.payload.length > 0) {
-            setId(data.payload[0]._id);
-            setUserInfo((prev: User) => ({
-               ...prev,
-               imageUrl: data.payload[0].imageUrl,
-               jobTitle: data.payload[0].jobTitle,
-               firstName: data.payload[0].firstName,
-               lastName: data.payload[0].lastName,
-               profSummary: data.payload[0].profSummary,
-               city: data.payload[0].city,
-               country: data.payload[0].country,
-               birthDate: data.payload[0].birthDate,
-               email: data.payload[0].email,
-               workHistory: data.payload[0].workHistory,
-               educationHistory: data.payload[0].educationHistory,
-               skills: data.payload[0].skills,
-               languages: data.payload[0].languages,
-            }));
-         };
-      });
-   }, []);
+      if(userId){
+         dispatch(fetchLastCvCurrentUser(userId)).then((data: any) => {
+            console.log(data)
+            // if (data.payload && data.payload.length > 0) {
+            //    setId(data.payload[0]._id);
+               setUserInfo((prev: User) => ({
+                  ...prev,
+                  imageUrl: data.payload.imageUrl,
+                  jobTitle: data.payload.jobTitle,
+                  firstName: data.payload.firstName,
+                  lastName: data.payload.lastName,
+                  profSummary: data.payload.profSummary,
+                  city: data.payload.city,
+                  country: data.payload.country,
+                  birthDate: data.payload.birthDate,
+                  email: data.payload.email,
+                  workHistory: data.payload.workHistory,
+                  educationHistory: data.payload.educationHistory,
+                  skills: data.payload.skills,
+                  languages: data.payload.languages,
+               }));
+            // };
+         });
+      };
+   }, [userId]);
 
    const [userInfo, setUserInfo] = useState<User>({
       imageUrl: '',
@@ -71,9 +80,16 @@ const PersonalDataContainer: React.FC = () => {
       };
    }, [userInfo.workHistory, userInfo.educationHistory, userInfo.languages, userInfo.skills]);
 
-   const eventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+   const eventHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
       setUserInfo({ ...userInfo, [e.target.id]: e.target.value })
-   };
+   }, [userInfo.birthDate,
+   userInfo.city,
+   userInfo.country,
+   userInfo.firstName,
+   userInfo.lastName,
+   userInfo.email,
+   userInfo.imageUrl,
+   userInfo.jobTitle]);
 
    const deleteWorkHistoryElement = useCallback((id: string) => {
       setChildrenWorkHistoryArray(childrenWorkHistoryArray.filter((item: WorkHistoryType) => item.id !== id));

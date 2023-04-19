@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { LanguageInfoType, User, UserEducationHistory, UserSkillType, UserWorkHistory } from "../types/types";
-import { fetchCVs } from './../requests/cvRequests';
+import { fetchCVs, fetchLastCvCurrentUser } from './../requests/cvRequests';
 
 
 export type initialStateType = {
@@ -75,15 +75,16 @@ const setCVs = createSlice({
    reducers: {
    },
    extraReducers: (builder) => {
-      builder.addCase(fetchCVs.pending.toString(), (state: initialStateType) => {
+      builder.addCase(fetchLastCvCurrentUser.pending.toString(), (state: initialStateType) => {
          state.cvInfo.status = 'loading';
       });
-      builder.addCase(fetchCVs.fulfilled.toString(), (state: initialStateType, action: PayloadAction<ActionPayloadType[]>) => {
-         if (action.payload && action.payload.length > 0) {
-            state.cvInfo = action.payload[action.payload.length - 1];
+      builder.addCase(fetchLastCvCurrentUser.fulfilled.toString(), (state: initialStateType, action: PayloadAction<ActionPayloadType>) => {
+         console.log(action.payload)
+         if (action.payload) {
+            state.cvInfo = action.payload;
             state.cvInfo.status = 'loaded';
          }
-         if (!action.payload || action.payload.length === 0) {
+         if (!action.payload) {
             state.cvInfo = {
                _id: '',
                status: '',
@@ -106,7 +107,7 @@ const setCVs = createSlice({
             state.cvInfo.status = 'loading';
          };
       });
-      builder.addCase(fetchCVs.rejected.toString(), (state: initialStateType) => {
+      builder.addCase(fetchLastCvCurrentUser.rejected.toString(), (state: initialStateType) => {
          state.cvInfo.status = 'error';
       });
    }

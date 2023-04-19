@@ -8,7 +8,7 @@ import Login from './components/Login/Login';
 import Registration from './components/Registration/Registration';
 import { useEffect } from 'react';
 import { fetchLogin } from './requests/cvRequests';
-import { useAppDispatch } from './redux/store';
+import { useAppDispatch, useAppSelector } from './redux/store';
 import WebFont from 'webfontloader';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
       }
     });
   }, []);
-
+  
   return (
     <>
       <Header/>

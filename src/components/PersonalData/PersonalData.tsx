@@ -34,13 +34,31 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const listRef = useRef<HTMLDivElement | null>(null);
    const navigate = useNavigate();
    const [isErrorEmail, setError] = useState<string | null>(null);
-   console.log(props.id)
+   console.log(props.id);
 
+   
    const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
 
-      if (!props.id && isValidEmail(props.userInfo.email)) {
+      // if (!props.id && isValidEmail(props.userInfo.email)) {
+      //    try {
+      //       await dispatch(postCV(props.userInfo));
+      //       navigate(`/showCv`);
+      //    } catch (err) {
+      //       console.log(err)
+      //    }
+      // }
+      // if (props.id && isValidEmail(props.userInfo.email)) {
+      //    try {
+      //       await dispatch(updateCV({id: props.id, data: props.userInfo}))
+      //       navigate(`/showCv/${props.id}`);
+      //    } catch (err) {
+      //       console.log(err);
+      //    };
+      // };
+
+      if (isValidEmail(props.userInfo.email)) {
          try {
             await dispatch(postCV(props.userInfo));
             navigate(`/showCv`);
@@ -48,14 +66,6 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
             console.log(err)
          }
       }
-      if (props.id && isValidEmail(props.userInfo.email)) {
-         try {
-            await dispatch(updateCV({id: props.id, data: props.userInfo}))
-            navigate(`/showCv/${props.id}`);
-         } catch (err) {
-            console.log(err);
-         };
-      };
    };
 
    const isButtonDisabled = () => {
