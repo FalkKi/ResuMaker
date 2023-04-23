@@ -4,40 +4,40 @@ import PersonalData from "./PersonalData"
 import { generateId } from '../../utils/helpers';
 import instance from './../../requests/mainAxios';
 import { useAppDispatch, useAppSelector } from './../../redux/store';
-import { fetchCVs, fetchLastCvCurrentUser } from './../../requests/cvRequests';
+import { fetchLastCvCurrentUser } from './../../requests/cvRequests';
 
 const PersonalDataContainer: React.FC = () => {
    const dispatch = useAppDispatch();
    const [id, setId] = useState<string | null>(null);
    const userId = useAppSelector((state) => {
-      if(state.auth.data){
+      if (state.auth.data) {
          return state.auth.data._id
       };
    });
    console.log('userId', userId)
- 
+
    useEffect(() => {
-      if(userId){
+      if (userId) {
          dispatch(fetchLastCvCurrentUser(userId)).then((data: any) => {
             console.log(data)
             // if (data.payload && data.payload.length > 0) {
             //    setId(data.payload[0]._id);
-               setUserInfo((prev: User) => ({
-                  ...prev,
-                  imageUrl: data.payload.imageUrl,
-                  jobTitle: data.payload.jobTitle,
-                  firstName: data.payload.firstName,
-                  lastName: data.payload.lastName,
-                  profSummary: data.payload.profSummary,
-                  city: data.payload.city,
-                  country: data.payload.country,
-                  birthDate: data.payload.birthDate,
-                  email: data.payload.email,
-                  workHistory: data.payload.workHistory,
-                  educationHistory: data.payload.educationHistory,
-                  skills: data.payload.skills,
-                  languages: data.payload.languages,
-               }));
+            setUserInfo((prev: User) => ({
+               ...prev,
+               imageUrl: data.payload.imageUrl,
+               jobTitle: data.payload.jobTitle,
+               firstName: data.payload.firstName,
+               lastName: data.payload.lastName,
+               profSummary: data.payload.profSummary,
+               city: data.payload.city,
+               country: data.payload.country,
+               birthDate: data.payload.birthDate,
+               email: data.payload.email,
+               workHistory: data.payload.workHistory,
+               educationHistory: data.payload.educationHistory,
+               skills: data.payload.skills,
+               languages: data.payload.languages,
+            }));
             // };
          });
       };
@@ -60,7 +60,7 @@ const PersonalDataContainer: React.FC = () => {
       userId: '',
    });
 
-   console.log(userInfo)
+
    const [childrenWorkHistoryArray, setChildrenWorkHistoryArray] = useState<WorkHistoryType[]>([]);
    const [childrenEducationHistoryArray, setChildrenEducationHistoryArray] = useState<EducationHistoryType[]>([]);
    const [childrenLanguageHistoryArray, setChildrenLanguageHistoryArray] = useState<LanguageHistoryType[]>([]);

@@ -84,6 +84,7 @@ export const fetchRegister = createAsyncThunk('auth/fetchRegister', async (param
 });
 
 export const fetchAuth = createAsyncThunk('auth/fetchUserData', async (params: userRegisterType) => {
+      console.log(params)
       const { data } = await instance.post('/auth/login', params);
       return data;
 });

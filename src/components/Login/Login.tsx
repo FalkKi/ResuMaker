@@ -9,38 +9,18 @@ import { FormValues } from "../../types/types";
 import { useAppDispatch, useAppSelector } from './../../redux/store';
 import { fetchAuth } from "../../requests/cvRequests";
 import { useNavigate } from 'react-router-dom';
-
-const resolver: Resolver<FormValues> = async (values) => {
-   return {
-      values: values.email ? values : values.password ? values : {},
-      errors: !values.email ? {
-         email: {
-            type: 'required',
-            message: 'email is required.',
-         },
-         password: {
-            type: 'required',
-            message: 'password is required.',
-         },
-      }
-         : !values.password ? {
-            password: {
-               type: 'required',
-               message: 'password is required.',
-            },
-         } : {}
-   };
-};
+import { useInput } from './../../hooks/validation';
 
 const Login = () => {
-   const dispatch = useAppDispatch();
-   const isAuth = useAppSelector(state => state.auth.data);
-   const navigate = useNavigate();
-   const { register, handleSubmit, formState: { errors, isValid } } = useForm<FormValues>({ resolver });
 
-   const onSubmit = handleSubmit(async (data) => {
-      const loginInfo = await dispatch(fetchAuth(data))
-      console.log(loginInfo)
+   const dispatch = useAppDispatch();
+   const navigate = useNavigate();
+   const email = useInput('', { isEmpty: true, minLength: 5, maxLenght: 15, isEmail: false, inputValid: false});
+   const password = useInput('', { isEmpty: true, minLength: 5, maxLength: 15, isEmail: false, inputValid: false});
+
+   const onSubmit = async (e: any) => {
+      e.preventDefault()
+      const loginInfo = await dispatch(fetchAuth({ email: email.value, password: password.value }))
       if (!loginInfo.payload) {
          return alert('Authorization failed');
       };
@@ -50,53 +30,42 @@ const Login = () => {
       if (loginInfo.payload) {
          navigate('/');
       };
-   });
+   };
 
    return (
-
       <Paper classes={{ root: styles.root }}>
          <Typography classes={{ root: styles.title }} variant="h5">
             Enter your account
          </Typography>
          <form onSubmit={onSubmit}>
 
-            {errors.email ? <TextField
+            <TextField
                className={styles.field}
                label='Email'
                type='email'
                fullWidth
-               {...register('email', { required: 'enter email' })}
                placeholder="email"
-               error={Boolean(errors.email.message)}
-               helperText={errors.email.message}
-            /> : <TextField
-               className={styles.field}
-               label='Email'
-               type='email'
-               fullWidth
-               {...register('email', { required: 'enter email' })}
-               placeholder="email"
-            />}
-
-            {errors.password ? <TextField
+               value={email.value}
+               onChange={e => email.onChange(e)}
+               onBlur={e => email.onBlur(e)}
+            />
+            {(email.dirty && email.isEmpty) && <div style={{ color: 'red' }}>Field can't be empty</div>}
+            {(email.dirty && email.minLengthError) && <div style={{ color: 'red' }}>Incorrect length</div>}
+            {(email.dirty && email.isEmailError) && <div style={{ color: 'red' }}>Incorrect email</div>}
+            <TextField
                className={styles.field}
                label='Password'
                type='password'
                fullWidth
-               {...register('password', { required: 'enter password' })}
                placeholder="password"
-               error={Boolean(errors.password.message)}
-               helperText={errors.password.message}
-            /> : <TextField
-               className={styles.field}
-               label='Password'
-               type='password'
-               fullWidth
-               {...register('password', { required: 'enter password' })}
-               placeholder="password"
-            />}
-
-            <Button disabled={!isValid} type="submit" size="large" variant="contained" fullWidth>
+               value={password.value}
+               onChange={e => password.onChange(e)}
+               onBlur={e => password.onBlur(e)}
+            />
+            {(password.dirty && password.isEmpty) && <div style={{ color: 'red' }}>Field can't be empty</div>}
+            {(password.dirty && password.minLengthError) && <div style={{ color: 'red' }}>Incorrect length</div>}
+            {(password.dirty && password.maxLengthError) && <div style={{ color: 'red' }}>Incorrect length</div>}
+            <Button disabled={!email.inputValid || !password.inputValid} type="submit" size="large" variant="contained" fullWidth>
                Enter
             </Button>
          </form>

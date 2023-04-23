@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import styles from './personalData.module.css';
 import { postCV } from '../../requests/cvRequests';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
+import { useAppDispatch } from '../../redux/store';
 import Avatar from '@mui/material/Avatar';
 import ProfSummary from './../profSummary/ProfSummary';
 import WorkHistory from '../Histories/workHistiory/WorkHistory';
@@ -13,12 +13,12 @@ import Languages from '../Histories/Languages/Languages';
 import Skills from '../Histories/Skills/Skills';
 import StartUserInfo from '../StartUserInformation/StartUserInformation';
 import Box from '@mui/material/Box';
-import { useNavigate, useParams } from 'react-router-dom';
+// import { useNavigate} from 'react-router-dom';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
 import deleteBtn from '../../pictures/deleteBtn.svg';
-import instance from './../../requests/mainAxios';
 import { isValidEmail } from '../../utils/helpers';
-import { updateCV } from './../../requests/cvRequests';
+import { useNavigate } from "react-router-dom";
+
 
 const buttonStyle = {
    mb: '15px',
@@ -36,7 +36,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const [isErrorEmail, setError] = useState<string | null>(null);
    console.log(props.id);
 
-   
+
    const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
@@ -66,6 +66,12 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
             console.log(err)
          }
       }
+   };
+
+   const loadPhoto = () => {
+      if(inputFileRef.current){
+         inputFileRef.current.click()
+      };
    };
 
    const isButtonDisabled = () => {
@@ -102,7 +108,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
                      </Button>
                   </div>
                ) : <Button variant='contained' className={styles.imageButton}
-                  onClick={() => { inputFileRef.current !== null ? inputFileRef.current.click() : null }} size="medium">
+                  onClick={loadPhoto} size="medium">
                   <Avatar
                      alt="userAvatar"
                      src=""

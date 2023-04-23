@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { ProfSummaryProps } from "../../types/types";
 import styles from './profSummary.module.css';
 import Box from '@mui/material/Box';

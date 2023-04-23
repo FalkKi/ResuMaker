@@ -20,8 +20,6 @@ const Registration = () => {
       password: '',
    });
    const dispatch = useAppDispatch();
-   const isAuth = useAppSelector(state => state.auth.data);
-   const isAuthStatus = useAppSelector(state => state.auth.status);
    const navigate = useNavigate();
 
    const [isErrorEmail, setError] = useState<string | null>(null);

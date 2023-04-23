@@ -20,7 +20,7 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             <TextField
                required
                label="your name"
-               value={props.userInfo.firstName|| ''}
+               value={props.userInfo.firstName || ''}
                onChange={props.eventHandler}
                id='firstName' type='text'
                className={styles.input}
@@ -28,7 +28,7 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             <TextField
                required
                label="your surname"
-               value={props.userInfo.lastName|| ''}
+               value={props.userInfo.lastName || ''}
                onChange={props.eventHandler}
                id='lastName' type='text'
                className={styles.input}
@@ -37,7 +37,7 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             {props.isErrorEmail ? <TextField
                required
                label="email"
-               value={props.userInfo.email|| ''}
+               value={props.userInfo.email || ''}
                onChange={props.eventHandler}
                id='email' type='text'
                helperText='incorrect email'
@@ -46,7 +46,7 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             /> : <TextField
                required
                label="email"
-               value={props.userInfo.email|| ''}
+               value={props.userInfo.email || ''}
                onChange={props.eventHandler}
                id='email' type='text'
                className={styles.input}
@@ -55,7 +55,7 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             <TextField
                required
                label="date of birth"
-               value={props.userInfo.birthDate|| ''}
+               value={props.userInfo.birthDate || ''}
                onChange={props.eventHandler}
                id='birthDate' type='text'
                className={styles.input}
@@ -63,7 +63,7 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             <TextField
                required
                label="country"
-               value={props.userInfo.country|| ''}
+               value={props.userInfo.country || ''}
                onChange={props.eventHandler}
                id='country'
                type='text'
@@ -72,7 +72,7 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             <TextField
                required
                label="city"
-               value={props.userInfo.city|| ''}
+               value={props.userInfo.city || ''}
                onChange={props.eventHandler}
                id='city'
                type='text'
