@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import styles from './personalData.module.css';
-import { postCV } from '../../requests/cvRequests';
+import { postCV, updateCV } from '../../requests/cvRequests';
 import { useAppDispatch } from '../../redux/store';
 import Avatar from '@mui/material/Avatar';
 import ProfSummary from './../profSummary/ProfSummary';
@@ -13,11 +13,11 @@ import Languages from '../Histories/Languages/Languages';
 import Skills from '../Histories/Skills/Skills';
 import StartUserInfo from '../StartUserInformation/StartUserInformation';
 import Box from '@mui/material/Box';
-// import { useNavigate} from 'react-router-dom';
+// import { useNavigate, useParams } from 'react-router-dom';
 import '../../fonts/Roboto/Roboto-Regular.ttf';
 import deleteBtn from '../../pictures/deleteBtn.svg';
 import { isValidEmail } from '../../utils/helpers';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 
 const buttonStyle = {
@@ -35,30 +35,15 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
    const navigate = useNavigate();
    const [isErrorEmail, setError] = useState<string | null>(null);
    console.log(props.id);
+   const { id } = useParams<string>();
+   console.log(id)
 
 
    const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
       e.preventDefault();
       isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
 
-      // if (!props.id && isValidEmail(props.userInfo.email)) {
-      //    try {
-      //       await dispatch(postCV(props.userInfo));
-      //       navigate(`/showCv`);
-      //    } catch (err) {
-      //       console.log(err)
-      //    }
-      // }
-      // if (props.id && isValidEmail(props.userInfo.email)) {
-      //    try {
-      //       await dispatch(updateCV({id: props.id, data: props.userInfo}))
-      //       navigate(`/showCv/${props.id}`);
-      //    } catch (err) {
-      //       console.log(err);
-      //    };
-      // };
-
-      if (isValidEmail(props.userInfo.email)) {
+      if (!id && isValidEmail(props.userInfo.email)) {
          try {
             await dispatch(postCV(props.userInfo));
             navigate(`/showCv`);
@@ -66,10 +51,27 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
             console.log(err)
          }
       }
+      if (id && isValidEmail(props.userInfo.email)) {
+         try {
+            await dispatch(updateCV({ id: id, data: props.userInfo }))
+            navigate(`/showCv/${id}`);
+         } catch (err) {
+            console.log(err);
+         };
+      };
+
+      // if (isValidEmail(props.userInfo.email)) {
+      //    try {
+      //       await dispatch(postCV(props.userInfo));
+      //       navigate(`/showCv`);
+      //    } catch (err) {
+      //       console.log(err)
+      //    }
+      // }
    };
 
    const loadPhoto = () => {
-      if(inputFileRef.current){
+      if (inputFileRef.current) {
          inputFileRef.current.click()
       };
    };

@@ -43,7 +43,7 @@ const FinalCV = () => {
          await dispatch(deleteCV(id));
          navigate('/');
       } catch (err) {
-         console.log(err)
+         console.log(err);
       };
    };
 

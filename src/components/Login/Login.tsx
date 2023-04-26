@@ -15,8 +15,8 @@ const Login = () => {
 
    const dispatch = useAppDispatch();
    const navigate = useNavigate();
-   const email = useInput('', { isEmpty: true, minLength: 5, maxLenght: 15, isEmail: false, inputValid: false});
-   const password = useInput('', { isEmpty: true, minLength: 5, maxLength: 15, isEmail: false, inputValid: false});
+   const email = useInput('', { isEmpty: true, isEmail: true});
+   const password = useInput('', { isEmpty: true, minLength: 5, maxLength: 15});
 
    const onSubmit = async (e: any) => {
       e.preventDefault()
@@ -31,7 +31,7 @@ const Login = () => {
          navigate('/');
       };
    };
-
+console.log(password.inputValid)
    return (
       <Paper classes={{ root: styles.root }}>
          <Typography classes={{ root: styles.title }} variant="h5">
@@ -65,7 +65,7 @@ const Login = () => {
             {(password.dirty && password.isEmpty) && <div style={{ color: 'red' }}>Field can't be empty</div>}
             {(password.dirty && password.minLengthError) && <div style={{ color: 'red' }}>Incorrect length</div>}
             {(password.dirty && password.maxLengthError) && <div style={{ color: 'red' }}>Incorrect length</div>}
-            <Button disabled={!email.inputValid || !password.inputValid} type="submit" size="large" variant="contained" fullWidth>
+            <Button disabled={!email.inputValid || !password.inputValid } type="submit" size="large" variant="contained" fullWidth>
                Enter
             </Button>
          </form>
