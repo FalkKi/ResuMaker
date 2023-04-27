@@ -1,8 +1,8 @@
-import './preloader.css';
-import React from 'react';
+import './preloader.css'
+import React from 'react'
 
 const Preloader: React.FC = () => {
-   return (
+  return (
       <div className='container'>
          <div className="loader">
             <div className="inner one"></div>
@@ -10,6 +10,6 @@ const Preloader: React.FC = () => {
             <div className="inner three"></div>
          </div>
       </div>
-   )
-};
-export default Preloader;
+  )
+}
+export default Preloader

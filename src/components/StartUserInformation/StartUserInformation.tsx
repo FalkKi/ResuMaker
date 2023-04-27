@@ -1,12 +1,11 @@
-import React from "react";
-import TextField from '@mui/material/TextField';
-import { StartUserInfoProps } from "../../types/types";
-import Box from '@mui/material/Box';
-import styles from './startUserInformation.module.css';
+import React from 'react'
+import TextField from '@mui/material/TextField'
+import { type StartUserInfoProps } from '../../types/types'
+import Box from '@mui/material/Box'
+import styles from './startUserInformation.module.css'
 
 const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
-
-   return (
+  return (
       <Box >
          <div className={styles.inputContainer}>
             <TextField
@@ -34,7 +33,8 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
                className={styles.input}
             />
 
-            {props.isErrorEmail ? <TextField
+            {props.isErrorEmail
+              ? <TextField
                required
                label="email"
                value={props.userInfo.email || ''}
@@ -43,7 +43,8 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
                helperText='incorrect email'
                error={true}
                className={styles.input}
-            /> : <TextField
+            />
+              : <TextField
                required
                label="email"
                value={props.userInfo.email || ''}
@@ -80,6 +81,6 @@ const StartUserInfo: React.FC<StartUserInfoProps> = (props) => {
             />
          </div>
       </Box>
-   );
-};
-export default StartUserInfo;
+  )
+}
+export default StartUserInfo

@@ -1,115 +1,106 @@
-import React, { useRef, useState } from 'react';
-import Button from '@mui/material/Button';
-import styles from './personalData.module.css';
-import { postCV, updateCV } from '../../requests/cvRequests';
-import { useAppDispatch } from '../../redux/store';
-import Avatar from '@mui/material/Avatar';
-import ProfSummary from './../profSummary/ProfSummary';
-import WorkHistory from '../Histories/workHistiory/WorkHistory';
-import { EducationHistoryType, LanguageHistoryType, PersonalDataProps, SkillsHistoryType, User, UserEducationHistory, UserSkillType } from '../../types/types';
-import { WorkHistoryType } from '../../types/types';
-import EducationHistory from '../Histories/EducationHistory/EducationHistory';
-import Languages from '../Histories/Languages/Languages';
-import Skills from '../Histories/Skills/Skills';
-import StartUserInfo from '../StartUserInformation/StartUserInformation';
-import Box from '@mui/material/Box';
-// import { useNavigate, useParams } from 'react-router-dom';
-import '../../fonts/Roboto/Roboto-Regular.ttf';
-import deleteBtn from '../../pictures/deleteBtn.svg';
-import { isValidEmail } from '../../utils/helpers';
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useRef, useState } from 'react'
+import Button from '@mui/material/Button'
+import styles from './personalData.module.css'
+import { postCV, updateCV } from '../../requests/cvRequests'
+import { useAppDispatch } from '../../redux/store'
+import Avatar from '@mui/material/Avatar'
+import ProfSummary from './../profSummary/ProfSummary'
+import WorkHistory from '../Histories/workHistiory/WorkHistory'
+import { type EducationHistoryType, type LanguageHistoryType, type PersonalDataProps, type SkillsHistoryType, type WorkHistoryType } from '../../types/types'
 
+import EducationHistory from '../Histories/EducationHistory/EducationHistory'
+import Languages from '../Histories/Languages/Languages'
+import Skills from '../Histories/Skills/Skills'
+import StartUserInfo from '../StartUserInformation/StartUserInformation'
+import Box from '@mui/material/Box'
+// import { useNavigate, useParams } from 'react-router-dom';
+import '../../fonts/Roboto/Roboto-Regular.ttf'
+import deleteBtn from '../../pictures/deleteBtn.svg'
+import { isValidEmail } from '../../utils/helpers'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const buttonStyle = {
-   mb: '15px',
-   ":hover": {
-      backgroundColor: '#3fb0ac',
-      color: '#fff'
-   }
+  mb: '15px',
+  ':hover': {
+    backgroundColor: '#3fb0ac',
+    color: '#fff'
+  }
 }
 
 const PersonalData: React.FC<PersonalDataProps> = (props) => {
-   const dispatch = useAppDispatch();
-   const inputFileRef = useRef<HTMLInputElement>(null);
-   const listRef = useRef<HTMLDivElement | null>(null);
-   const navigate = useNavigate();
-   const [isErrorEmail, setError] = useState<string | null>(null);
-   console.log(props.id);
-   const { id } = useParams<string>();
-   console.log(id)
+  const dispatch = useAppDispatch()
+  const inputFileRef = useRef<HTMLInputElement>(null)
+  const listRef = useRef<HTMLDivElement | null>(null)
+  const navigate = useNavigate()
+  const [isErrorEmail, setError] = useState<string | null>(null)
+  console.log(props.id)
+  const { id } = useParams<string>()
+  console.log(id)
 
+  const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+    isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email')
 
-   const createResume = async (e: React.MouseEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      isValidEmail(props.userInfo.email) ? setError(null) : setError('incorrect email');
-
-      if (!id && isValidEmail(props.userInfo.email)) {
-         try {
-            await dispatch(postCV(props.userInfo));
-            navigate(`/showCv`);
-         } catch (err) {
-            console.log(err)
-         }
+    if (!id && isValidEmail(props.userInfo.email)) {
+      try {
+        await dispatch(postCV(props.userInfo))
+        navigate('/showCv')
+      } catch (err) {
+        console.log(err)
       }
-      if (id && isValidEmail(props.userInfo.email)) {
-         try {
-            await dispatch(updateCV({ id: id, data: props.userInfo }))
-            navigate(`/showCv/${id}`);
-         } catch (err) {
-            console.log(err);
-         };
+    }
+    if (id && isValidEmail(props.userInfo.email)) {
+      try {
+        await dispatch(updateCV({ id, data: props.userInfo }))
+        navigate(`/showCv/${id}`)
+      } catch (err) {
+        console.log(err)
       };
+    };
+  };
 
-      // if (isValidEmail(props.userInfo.email)) {
-      //    try {
-      //       await dispatch(postCV(props.userInfo));
-      //       navigate(`/showCv`);
-      //    } catch (err) {
-      //       console.log(err)
-      //    }
-      // }
-   };
+  const loadPhoto = () => {
+    if (inputFileRef.current != null) {
+      inputFileRef.current.click()
+    };
+  }
 
-   const loadPhoto = () => {
-      if (inputFileRef.current) {
-         inputFileRef.current.click()
-      };
-   };
+  const isButtonDisabled = () => {
+    return !(props.userInfo.jobTitle !== '' && props.userInfo.firstName !== '' &&
+         props.userInfo.lastName !== '' && props.userInfo.email !== '' && props.userInfo.country &&
+         props.userInfo.city !== '' && props.userInfo.birthDate !== '' && props.userInfo.profSummary !== '')
+  }
 
-   const isButtonDisabled = () => {
-      return !(props.userInfo.jobTitle !== '' && props.userInfo.firstName !== ''
-         && props.userInfo.lastName !== '' && props.userInfo.email !== '' && props.userInfo.country
-         && props.userInfo.city !== '' && props.userInfo.birthDate !== '' && props.userInfo.profSummary !== '');
-   };
-
-   return (
+  return (
       <div className={styles.container}>
          <Box
             component="form"
             sx={{
-               '& .MuiTextField-root': {
-                  margin: '15px 15px 0 15px',
-               },
-               maxWidth: "900px",
-               margin: "auto",
-               textTransform: 'uppercase',
-               fontFamily: 'Tahoma',
+              '& .MuiTextField-root': {
+                margin: '15px 15px 0 15px'
+              },
+              maxWidth: '900px',
+              margin: 'auto',
+              textTransform: 'uppercase',
+              fontFamily: 'Tahoma'
             }}
          >
             <div>
                <input ref={inputFileRef} type="file" onChange={props.handleChangeFile} hidden />
-               {props.userInfo.imageUrl ? (
+               {props.userInfo.imageUrl
+                 ? (
                   <div className={styles.withFoto}>
                      <img className={styles.image} src={`http://localhost:4434${props.userInfo.imageUrl}`} alt="Uploaded" />
                      <Button sx={{
-                        width: '50px',
-                        height: '50px',
-                        ml: '10px'
+                       width: '50px',
+                       height: '50px',
+                       ml: '10px'
                      }} onClick={props.onClickRemoveImage} variant="contained" color="error">
                         <img className={styles.deleteBtnImg} src={deleteBtn} alt="" />
                      </Button>
                   </div>
-               ) : <Button variant='contained' className={styles.imageButton}
+                   )
+                 : <Button variant='contained' className={styles.imageButton}
                   onClick={loadPhoto} size="medium">
                   <Avatar
                      alt="userAvatar"
@@ -195,7 +186,7 @@ const PersonalData: React.FC<PersonalDataProps> = (props) => {
          </Box>
 
       </div >
-   );
-};
+  )
+}
 
-export default PersonalData;
+export default PersonalData

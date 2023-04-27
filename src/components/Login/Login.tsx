@@ -1,38 +1,35 @@
-import React, { useState } from "react";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import styles from "./login.module.css";
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { useForm, Resolver } from "react-hook-form";
-import { FormValues } from "../../types/types";
-import { useAppDispatch, useAppSelector } from './../../redux/store';
-import { fetchAuth } from "../../requests/cvRequests";
-import { useNavigate } from 'react-router-dom';
-import { useInput } from './../../hooks/validation';
+import React from 'react'
+import Paper from '@mui/material/Paper'
+import Typography from '@mui/material/Typography'
+import styles from './login.module.css'
+import TextField from '@mui/material/TextField'
+import Button from '@mui/material/Button'
+import { useAppDispatch } from './../../redux/store'
+import { fetchAuth } from '../../requests/cvRequests'
+import { useNavigate } from 'react-router-dom'
+import { useInput } from './../../hooks/validation'
 
 const Login = () => {
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const email = useInput('', { isEmpty: true, isEmail: true })
+  const password = useInput('', { isEmpty: true, minLength: 5, maxLength: 15 })
 
-   const dispatch = useAppDispatch();
-   const navigate = useNavigate();
-   const email = useInput('', { isEmpty: true, isEmail: true});
-   const password = useInput('', { isEmpty: true, minLength: 5, maxLength: 15});
-
-   const onSubmit = async (e: any) => {
-      e.preventDefault()
-      const loginInfo = await dispatch(fetchAuth({ email: email.value, password: password.value }))
-      if (!loginInfo.payload) {
-         return alert('Authorization failed');
-      };
-      if ('token' in loginInfo.payload) {
-         window.localStorage.setItem('token', loginInfo.payload.token);
-      };
-      if (loginInfo.payload) {
-         navigate('/');
-      };
-   };
-console.log(password.inputValid)
-   return (
+  const onSubmit = async (e: any) => {
+    e.preventDefault()
+    const loginInfo = await dispatch(fetchAuth({ email: email.value, password: password.value }))
+    if (!loginInfo.payload) {
+      alert('Authorization failed'); return
+    };
+    if ('token' in loginInfo.payload) {
+      window.localStorage.setItem('token', loginInfo.payload.token)
+    };
+    if (loginInfo.payload) {
+      navigate('/')
+    };
+  }
+  console.log(password.inputValid)
+  return (
       <Paper classes={{ root: styles.root }}>
          <Typography classes={{ root: styles.title }} variant="h5">
             Enter your account
@@ -46,8 +43,8 @@ console.log(password.inputValid)
                fullWidth
                placeholder="email"
                value={email.value}
-               onChange={e => email.onChange(e)}
-               onBlur={e => email.onBlur(e)}
+               onChange={e => { email.onChange(e) }}
+               onBlur={e => { email.onBlur(e) }}
             />
             {(email.dirty && email.isEmpty) && <div style={{ color: 'red' }}>Field can't be empty</div>}
             {(email.dirty && email.minLengthError) && <div style={{ color: 'red' }}>Incorrect length</div>}
@@ -59,8 +56,8 @@ console.log(password.inputValid)
                fullWidth
                placeholder="password"
                value={password.value}
-               onChange={e => password.onChange(e)}
-               onBlur={e => password.onBlur(e)}
+               onChange={e => { password.onChange(e) }}
+               onBlur={e => { password.onBlur(e) }}
             />
             {(password.dirty && password.isEmpty) && <div style={{ color: 'red' }}>Field can't be empty</div>}
             {(password.dirty && password.minLengthError) && <div style={{ color: 'red' }}>Incorrect length</div>}
@@ -70,6 +67,6 @@ console.log(password.inputValid)
             </Button>
          </form>
       </Paper>
-   );
+  )
 }
-export default Login;
+export default Login
