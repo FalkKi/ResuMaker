@@ -53,7 +53,7 @@ export const postCV = createAsyncThunk('makecv/postCV', async (info: User) => {
   }
 })
 
-export const updateCV = createAsyncThunk('makecv/updateCV', async (info: { id: string, data: unknown }) => {
+export const updateCV = createAsyncThunk('makecv/updateCV', async (info: { id: string, data: User }) => {
   console.log(info)
   try {
     const { data } = await instance.patch<User>(`/makecv/${info.id}`, info.data)

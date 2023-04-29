@@ -3,7 +3,7 @@ import styles from "./header.module.css";
 import logo from "../../pictures/logo.svg";
 import { useAppSelector, useAppDispatch } from "./../../redux/store";
 import Button from "@mui/material/Button";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../redux/authReducer";
 
 const Header: React.FC = () => {
